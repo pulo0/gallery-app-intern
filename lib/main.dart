@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gallery_app/screens/tabs_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 final mainColorScheme = ColorScheme.fromSeed(
@@ -25,12 +26,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       title: 'Gallerify',
       theme: mainTheme,
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('A tab bar'),
-          centerTitle: true,
-        ),
-      ),
+      home: const TabsScreen(),
     );
   }
 }
