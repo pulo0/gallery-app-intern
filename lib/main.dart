@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-final mainTheme = ThemeData(
+final mainColorScheme = ColorScheme.fromSeed(
+  seedColor: const Color.fromARGB(255, 133, 46, 233),
   brightness: Brightness.dark,
-  colorScheme: ColorScheme.fromSeed(
-    seedColor: const Color.fromARGB(255, 133, 46, 233),
-  ),
+);
+
+final mainTheme = ThemeData(
+  colorScheme: mainColorScheme,
   textTheme: GoogleFonts.abelTextTheme(),
+  appBarTheme: AppBarTheme(
+    centerTitle: true,
+    backgroundColor: mainColorScheme.surfaceContainerLow,
+  ),
 );
 
 void main() => runApp(const MainApp());
@@ -21,7 +27,8 @@ class MainApp extends StatelessWidget {
       theme: mainTheme,
       home: Scaffold(
         appBar: AppBar(
-          title: Text('A tab bar'),
+          title: const Text('A tab bar'),
+          centerTitle: true,
         ),
       ),
     );
