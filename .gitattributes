@@ -1,6 +1,8 @@
 # Programming languages to not detect
 *.cc -linguist-detectable
 *.cpp -linguist-detectable
+*.cmake -linguist-detectable
+*.swift -linguist-detectable
 
 # Programming languages to detect
 *.dart linguist-detectable
