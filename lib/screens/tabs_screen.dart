@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gallery_app/main.dart';
+import 'package:gallery_app/screens/album_screen.dart';
+import 'package:gallery_app/screens/comments_screen.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({super.key});
@@ -11,7 +13,7 @@ class TabsScreen extends StatefulWidget {
 class _TabsScreen extends State<TabsScreen> {
   int _currentIndex = 0;
   String _currentPageName = '';
-  final Widget _activeContent = Center(
+  Widget _activeContent = Center(
     child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
@@ -41,9 +43,11 @@ class _TabsScreen extends State<TabsScreen> {
     switch (_currentIndex) {
       case 1:
         _currentPageName = 'Comments';
+        _activeContent = const CommentsScreen();
         break;
       default:
         _currentPageName = 'Album';
+        _activeContent = const AlbumScreen();
         break;
     }
 

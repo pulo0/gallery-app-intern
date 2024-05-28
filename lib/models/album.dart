@@ -2,19 +2,25 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-Future<Item> fetchItem() async {
+Future<List<Album>> fetchAlbum() async {
   final url = Uri.parse('https://jsonplaceholder.typicode.com/photos');
   final response = await http.get(url);
+  final decodedUrl = jsonDecode(response.body);
+
+  List<Album> albums = [];
 
   if (response.statusCode == 200) {
-    return Item.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+    for (var eachElement in decodedUrl) {
+      albums.add(Album.fromJson(eachElement));
+    }
   } else {
     throw Exception('Failed to load');
   }
+  return albums;
 }
 
-class Item {
-  Item({
+class Album {
+  Album({
     required this.albumId,
     required this.id,
     required this.title,
@@ -28,7 +34,7 @@ class Item {
   final String url;
   final String thumbnailUrl;
 
-  factory Item.fromJson(Map<String, dynamic> json) {
+  factory Album.fromJson(Map<String, dynamic> json) {
     return switch (json) {
       {
         'albumId': int albumId,
@@ -37,7 +43,7 @@ class Item {
         'url': String url,
         'thumbnailUrl': String thumbnailUrl,
       } =>
-        Item(
+        Album(
           albumId: albumId,
           id: id,
           title: title,
