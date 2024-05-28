@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gallery_app/screens/tabs_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -16,7 +17,11 @@ final mainTheme = ThemeData(
   ),
 );
 
-void main() => runApp(const MainApp());
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  runApp(const MainApp());
+}
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});

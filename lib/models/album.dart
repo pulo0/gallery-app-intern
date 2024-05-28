@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 Future<Item> fetchItem() async {
-  final response =
-      await http.get(Uri.parse('https://jsonplaceholder.typicode.com/photos'));
+  final url = Uri.parse('https://jsonplaceholder.typicode.com/photos');
+  final response = await http.get(url);
 
   if (response.statusCode == 200) {
     return Item.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
