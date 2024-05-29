@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gallery_app/main.dart';
 import 'package:gallery_app/models/album.dart';
+import 'package:gallery_app/widgets/comments_list.dart';
 
 class AlbumScreen extends StatefulWidget {
   const AlbumScreen({super.key});
@@ -16,19 +17,7 @@ class _AlbumScreeen extends State<AlbumScreen> {
       future: fetchAlbum(),
       builder: (context, AsyncSnapshot<List<Album>> snapshot) {
         return snapshot.hasData
-            ? ListView.builder(
-                itemCount: snapshot.data!.length,
-                itemBuilder: (context, index) => ListTile(
-                  leading: snapshot.connectionState == ConnectionState.waiting
-                      ? const CircularProgressIndicator()
-                      : CircleAvatar(
-                          radius: 16,
-                          backgroundImage:
-                              NetworkImage(snapshot.data![index].thumbnailUrl),
-                        ),
-                  title: Text(snapshot.data![index].title),
-                ),
-              )
+            ? CommentsList(snapshot)
             : Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
