@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gallery_app/main.dart';
 import 'package:gallery_app/models/album.dart';
 
 class AlbumScreen extends StatefulWidget {
@@ -9,36 +10,45 @@ class AlbumScreen extends StatefulWidget {
 }
 
 class _AlbumScreeen extends State<AlbumScreen> {
-  List<Album> futureAlbum = [];
-
-  @override
-  void initState() {
-    fetchAlbum().then(
-      (value) {
-        setState(() {
-          futureAlbum.addAll(value);
-        });
-      },
-    );
-    super.initState();
-    print(futureAlbum);
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: ListView.builder(
-      itemBuilder: (context, index) => ListTile(
-        leading: CircleAvatar(
-          radius: 16,
-          backgroundImage: NetworkImage(futureAlbum[index].thumbnailUrl),
-        ),
-        title: Text(
-          futureAlbum[index].title,
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
-      itemCount: futureAlbum.length,
-    ));
+    return FutureBuilder<List<Album>>(
+      future: fetchAlbum(),
+      builder: (context, AsyncSnapshot<List<Album>> snapshot) {
+        return snapshot.hasData
+            ? ListView.builder(
+                itemCount: snapshot.data!.length,
+                itemBuilder: (context, index) => ListTile(
+                  leading: snapshot.connectionState == ConnectionState.waiting
+                      ? const CircularProgressIndicator()
+                      : CircleAvatar(
+                          radius: 16,
+                          backgroundImage:
+                              NetworkImage(snapshot.data![index].thumbnailUrl),
+                        ),
+                  title: Text(snapshot.data![index].title),
+                ),
+              )
+            : Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const CircularProgressIndicator(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 16,
+                        horizontal: 26,
+                      ),
+                      child: Text(
+                        'Loading album from http request',
+                        style: mainTheme.textTheme.titleLarge!.copyWith(
+                            color: mainColorScheme.primary, fontSize: 26),
+                      ),
+                    )
+                  ],
+                ),
+              );
+      },
+    );
   }
 }

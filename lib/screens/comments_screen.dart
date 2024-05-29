@@ -10,6 +10,8 @@ class CommentsScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          const CircularProgressIndicator(),
+          const SizedBox(height: 16),
           Text(
             'Comments TODO: Loading...',
             textAlign: TextAlign.center,
@@ -18,8 +20,6 @@ class CommentsScreen extends StatelessWidget {
               fontSize: 26,
             ),
           ),
-          const SizedBox(height: 16),
-          const CircularProgressIndicator(),
         ],
       ),
     );
