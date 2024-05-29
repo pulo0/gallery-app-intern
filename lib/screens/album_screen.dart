@@ -28,9 +28,15 @@ class _AlbumScreeen extends State<AlbumScreen> {
   Widget build(BuildContext context) {
     return Center(
         child: ListView.builder(
-      itemBuilder: (context, index) => Text(
-        futureAlbum[index].title,
-        style: TextStyle(color: Colors.white),
+      itemBuilder: (context, index) => ListTile(
+        leading: CircleAvatar(
+          radius: 16,
+          backgroundImage: NetworkImage(futureAlbum[index].thumbnailUrl),
+        ),
+        title: Text(
+          futureAlbum[index].title,
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       itemCount: futureAlbum.length,
     ));

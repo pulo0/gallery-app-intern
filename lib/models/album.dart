@@ -9,13 +9,14 @@ Future<List<Album>> fetchAlbum() async {
 
   List<Album> albums = [];
 
-  if (response.statusCode == 200) {
-    for (var eachElement in decodedUrl) {
+  for (var eachElement in decodedUrl) {
+    if (response.statusCode == 200) {
       albums.add(Album.fromJson(eachElement));
+    } else {
+      throw Exception('Failed to load');
     }
-  } else {
-    throw Exception('Failed to load');
   }
+
   return albums;
 }
 
