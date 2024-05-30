@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 Future<List<Album>> fetchAlbum() async {
-  final url = Uri.parse('https://jsonplaceholder.typicode.com/phtos');
+  final url = Uri.parse('https://jsonplaceholder.typicode.com/photos');
   final response = await http.get(url);
   final decodedUrl = jsonDecode(response.body);
   List<Album> albums = [];

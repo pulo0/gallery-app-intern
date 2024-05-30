@@ -18,7 +18,7 @@ class _AlbumScreeen extends State<AlbumScreen> {
       builder: (context, AsyncSnapshot<List<Album>> snapshot) {
         return snapshot.hasData
             ? CommentsList(snapshot)
-            : LoadingError(snapshot);
+            : LoadingError(snapshot, fetchAlbum);
       },
     );
   }

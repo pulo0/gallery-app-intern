@@ -10,7 +10,12 @@ final mainColorScheme = ColorScheme.fromSeed(
 
 final mainTheme = ThemeData(
   colorScheme: mainColorScheme,
-  textTheme: GoogleFonts.abelTextTheme(),
+  textTheme: GoogleFonts.abelTextTheme().copyWith(
+    titleLarge: GoogleFonts.abel(
+      color: mainColorScheme.primary,
+      fontSize: 26,
+    )
+  ),
   appBarTheme: AppBarTheme(
     centerTitle: true,
     backgroundColor: mainColorScheme.surfaceContainerLow,

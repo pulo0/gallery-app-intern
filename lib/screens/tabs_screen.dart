@@ -22,11 +22,8 @@ class _TabsScreen extends State<TabsScreen> {
           Text(
             'TODO: A list of thumbnails, don\'t worry...',
             textAlign: TextAlign.center,
-            style: mainTheme.textTheme.titleLarge!.copyWith(
-              color: mainColorScheme.primary,
-              fontSize: 26,
+            style: mainTheme.textTheme.titleLarge,
             ),
-          ),
           const SizedBox(height: 16),
           const CircularProgressIndicator(),
         ],

@@ -4,9 +4,10 @@ import 'package:gallery_app/main.dart';
 import 'package:gallery_app/models/album.dart';
 
 class LoadingError extends StatefulWidget {
-  const LoadingError(this.snapshot, {super.key});
+  const LoadingError(this.snapshot, this.fetchData, {super.key});
 
   final AsyncSnapshot<List<Album>> snapshot;
+  final void Function() fetchData;
 
   @override
   State<LoadingError> createState() => _LoadingError();
@@ -55,18 +56,26 @@ class _LoadingError extends State<LoadingError> {
               vertical: 16,
               horizontal: 26,
             ),
-            child: Text(
-              _isVisible
-                  ? 'Restart fetching album data'
-                  : 'Loading album from http request...',
-              style: mainTheme.textTheme.titleLarge!
-                  .copyWith(color: mainColorScheme.primary, fontSize: 26),
+            child: AnimatedCrossFade(
+              firstChild: Text(
+                'Loading album from http request...',
+                style: mainTheme.textTheme.titleLarge,
+              ),
+              secondChild: Text(
+                'Restart fetching album data',
+                style: mainTheme.textTheme.titleLarge,
+              ),
+              crossFadeState: !_isVisible
+                  ? CrossFadeState.showFirst
+                  : CrossFadeState.showSecond,
+              duration: const Duration(milliseconds: 250),
             ),
           ),
-          Visibility(
-            visible: _isVisible,
+          AnimatedOpacity(
+            opacity: _isVisible ? 1.0 : 0.0,
+            duration: const Duration(milliseconds: 250),
             child: ElevatedButton(
-              onPressed: fetchAlbum,
+              onPressed: widget.fetchData,
               child: Text(
                 'Restart',
                 style: mainTheme.textTheme.labelMedium!.copyWith(

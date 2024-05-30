@@ -15,10 +15,7 @@ class CommentsScreen extends StatelessWidget {
           Text(
             'Comments TODO: Loading...',
             textAlign: TextAlign.center,
-            style: mainTheme.textTheme.titleLarge!.copyWith(
-              color: mainColorScheme.primary,
-              fontSize: 26,
-            ),
+            style: mainTheme.textTheme.titleLarge,
           ),
         ],
       ),
