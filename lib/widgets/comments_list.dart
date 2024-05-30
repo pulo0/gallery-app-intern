@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:gallery_app/models/album.dart';
+import 'package:gallery_app/models/comment.dart';
 
 class CommentsList extends StatelessWidget {
   const CommentsList(this.snapshot, {super.key});
 
-  final AsyncSnapshot<List<Album>> snapshot;
+  final AsyncSnapshot<List<Comment>> snapshot;
 
   @override
   Widget build(BuildContext context) {
@@ -13,12 +13,8 @@ class CommentsList extends StatelessWidget {
       itemBuilder: (context, index) => ListTile(
         leading: snapshot.connectionState == ConnectionState.waiting
             ? const CircularProgressIndicator()
-            : CircleAvatar(
-                radius: 16,
-                backgroundImage:
-                    NetworkImage(snapshot.data![index].thumbnailUrl),
-              ),
-        title: Text(snapshot.data![index].title),
+            : Text(snapshot.data![index].email),
+        title: Text(snapshot.data![index].name),
       ),
     );
   }

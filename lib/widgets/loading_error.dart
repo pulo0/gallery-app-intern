@@ -1,12 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:gallery_app/main.dart';
-import 'package:gallery_app/models/album.dart';
 
 class LoadingError extends StatefulWidget {
-  const LoadingError(this.snapshot, this.fetchData, {super.key});
+  const LoadingError(this.fetchData, {super.key});
 
-  final AsyncSnapshot<List<Album>> snapshot;
   final void Function() fetchData;
 
   @override

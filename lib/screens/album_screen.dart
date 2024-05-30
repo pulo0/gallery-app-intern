@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gallery_app/models/album.dart';
-import 'package:gallery_app/widgets/comments_list.dart';
+// import 'package:gallery_app/widgets/comments_list.dart';
 import 'package:gallery_app/widgets/loading_error.dart';
+import 'package:gallery_app/widgets/photos_grid.dart';
 
 class AlbumScreen extends StatefulWidget {
   const AlbumScreen({super.key});
@@ -17,8 +18,8 @@ class _AlbumScreeen extends State<AlbumScreen> {
       future: fetchAlbum(),
       builder: (context, AsyncSnapshot<List<Album>> snapshot) {
         return snapshot.hasData
-            ? CommentsList(snapshot)
-            : LoadingError(snapshot, fetchAlbum);
+            ? PhotosGrid(snapshot)
+            : const LoadingError(fetchAlbum);
       },
     );
   }
