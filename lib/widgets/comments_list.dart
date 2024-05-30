@@ -15,6 +15,7 @@ class CommentsList extends StatelessWidget {
             ? const CircularProgressIndicator()
             : Text(snapshot.data![index].email),
         title: Text(snapshot.data![index].name),
+        subtitle: Text(snapshot.data![index].body),
       ),
     );
   }

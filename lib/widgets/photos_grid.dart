@@ -22,6 +22,7 @@ class PhotosGrid extends StatelessWidget {
         child: Ink(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
+            color: const Color.fromARGB(31, 122, 121, 121),
             image: DecorationImage(
               image: NetworkImage(snapshot.data![index].thumbnailUrl),
               fit: BoxFit.cover,
