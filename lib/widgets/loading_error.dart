@@ -57,10 +57,12 @@ class _LoadingError extends State<LoadingError> {
             child: AnimatedCrossFade(
               firstChild: Text(
                 'Loading album from http request...',
+                textAlign: TextAlign.center,
                 style: mainTheme.textTheme.titleLarge,
               ),
               secondChild: Text(
                 'Restart fetching album data',
+                textAlign: TextAlign.center,
                 style: mainTheme.textTheme.titleLarge,
               ),
               crossFadeState: !_isVisible
