@@ -39,6 +39,7 @@ class _SingleInkPanelState extends State<SingleInkPanel> {
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
+        clipBehavior: Clip.antiAlias,
         title: Text(
           widget.snapshot.data![widget.index].title,
           style: mainTheme.textTheme.titleMedium!
@@ -47,6 +48,17 @@ class _SingleInkPanelState extends State<SingleInkPanel> {
         content: Image.network(
           widget.snapshot.data![widget.index].url,
           fit: BoxFit.cover,
+          loadingBuilder: (context, child, loadingProgress) =>
+              loadingProgress == null
+                  ? child
+                  : Center(
+                      child: CircularProgressIndicator(
+                        value: loadingProgress.expectedTotalBytes != null
+                            ? loadingProgress.cumulativeBytesLoaded /
+                                loadingProgress.expectedTotalBytes!
+                            : null,
+                      ),
+                    ),
         ),
         actions: [
           TextButton(
