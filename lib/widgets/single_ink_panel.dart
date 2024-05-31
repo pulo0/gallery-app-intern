@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gallery_app/main.dart';
 import 'package:gallery_app/models/album.dart';
@@ -38,35 +41,64 @@ class _SingleInkPanelState extends State<SingleInkPanel> {
   Future<void> _dialogShow(BuildContext context) {
     return showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        clipBehavior: Clip.antiAlias,
-        title: Text(
-          widget.snapshot.data![widget.index].title,
-          style: mainTheme.textTheme.titleMedium!
-              .copyWith(color: mainColorScheme.primary),
-        ),
-        content: Image.network(
-          widget.snapshot.data![widget.index].url,
-          fit: BoxFit.cover,
-          loadingBuilder: (context, child, loadingProgress) =>
-              loadingProgress == null
-                  ? child
-                  : Center(
-                      child: CircularProgressIndicator(
-                        value: loadingProgress.expectedTotalBytes != null
-                            ? loadingProgress.cumulativeBytesLoaded /
-                                loadingProgress.expectedTotalBytes!
-                            : null,
-                      ),
-                    ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Go back'),
-          ),
-        ],
-      ),
+      builder: (context) => Platform.isIOS
+          ? CupertinoAlertDialog(
+              title: Text(
+                widget.snapshot.data![widget.index].title,
+                style: mainTheme.textTheme.titleMedium!
+                    .copyWith(color: mainColorScheme.primary),
+              ),
+              content: Image.network(
+                widget.snapshot.data![widget.index].url,
+                fit: BoxFit.cover,
+                loadingBuilder: (context, child, loadingProgress) =>
+                    loadingProgress == null
+                        ? child
+                        : Center(
+                            child: CircularProgressIndicator(
+                              value: loadingProgress.expectedTotalBytes != null
+                                  ? loadingProgress.cumulativeBytesLoaded /
+                                      loadingProgress.expectedTotalBytes!
+                                  : null,
+                            ),
+                          ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: const Text('Go back'),
+                ),
+              ],
+            )
+          : AlertDialog(
+              clipBehavior: Clip.antiAlias,
+              title: Text(
+                widget.snapshot.data![widget.index].title,
+                style: mainTheme.textTheme.titleMedium!
+                    .copyWith(color: mainColorScheme.primary),
+              ),
+              content: Image.network(
+                widget.snapshot.data![widget.index].url,
+                fit: BoxFit.cover,
+                loadingBuilder: (context, child, loadingProgress) =>
+                    loadingProgress == null
+                        ? child
+                        : Center(
+                            child: CircularProgressIndicator(
+                              value: loadingProgress.expectedTotalBytes != null
+                                  ? loadingProgress.cumulativeBytesLoaded /
+                                      loadingProgress.expectedTotalBytes!
+                                  : null,
+                            ),
+                          ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: const Text('Go back'),
+                ),
+              ],
+            ),
     );
   }
 }
