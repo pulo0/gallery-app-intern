@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gallery_app/main.dart';
@@ -25,7 +26,7 @@ class _SingleInkPanelState extends State<SingleInkPanel> {
           color: const Color.fromARGB(31, 122, 121, 121),
           image: DecorationImage(
             image:
-                NetworkImage(widget.snapshot.data![widget.index].thumbnailUrl),
+                CachedNetworkImageProvider(widget.snapshot.data![widget.index].thumbnailUrl,),
             fit: BoxFit.cover,
           ),
         ),
@@ -63,7 +64,7 @@ class _SingleInkPanelState extends State<SingleInkPanel> {
                             ),
                           ),
               ),
-              actions: [
+              actions: <Widget>[
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(),
                   child: const Text('Go back'),
@@ -77,22 +78,26 @@ class _SingleInkPanelState extends State<SingleInkPanel> {
                 style: mainTheme.textTheme.titleMedium!
                     .copyWith(color: mainColorScheme.primary),
               ),
-              content: Image.network(
-                widget.snapshot.data![widget.index].url,
-                fit: BoxFit.cover,
-                loadingBuilder: (context, child, loadingProgress) =>
-                    loadingProgress == null
-                        ? child
-                        : Center(
-                            child: CircularProgressIndicator(
-                              value: loadingProgress.expectedTotalBytes != null
-                                  ? loadingProgress.cumulativeBytesLoaded /
-                                      loadingProgress.expectedTotalBytes!
-                                  : null,
+              content: SizedBox(
+                height: 300,
+                width: 300,
+                child: Image.network(
+                  widget.snapshot.data![widget.index].url,
+                  fit: BoxFit.cover,
+                  loadingBuilder: (context, child, loadingProgress) =>
+                      loadingProgress == null
+                          ? child
+                          : Center(
+                              child: CircularProgressIndicator(
+                                value: loadingProgress.expectedTotalBytes != null
+                                    ? loadingProgress.cumulativeBytesLoaded /
+                                        loadingProgress.expectedTotalBytes!
+                                    : null,
+                              ),
                             ),
-                          ),
+                ),
               ),
-              actions: [
+              actions: <Widget>[
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(),
                   child: const Text('Go back'),
