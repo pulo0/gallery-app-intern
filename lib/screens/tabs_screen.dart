@@ -51,7 +51,7 @@ class _TabsScreenState extends State<TabsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(_currentPageName),
-        elevation: 2,
+        elevation: 1,
       ),
       body: _activeContent,
       bottomNavigationBar: BottomNavigationBar(
