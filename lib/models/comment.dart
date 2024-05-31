@@ -9,14 +9,12 @@ Future<List<Comment>> fetchComment() async {
   List<Comment> comments = [];
 
   try {
-    for (var eachElement in decodedUrl) {
-      if (response.statusCode == 200) {
-        comments.add(
-          Comment.fromJson(eachElement),
-        );
-      } else {
-        throw Exception(response.body);
+    if (response.statusCode == 200) {
+      for (var eachElement in decodedUrl) {
+        comments.add(Comment.fromJson(eachElement));
       }
+    } else {
+      throw Exception(response.body);
     }
   } catch (exception) {
     throw Exception('Failed to fetch data from http package');

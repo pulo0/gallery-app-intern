@@ -9,14 +9,12 @@ Future<List<Album>> fetchAlbum() async {
   List<Album> albums = [];
 
   try {
-    for (var eachElement in decodedUrl) {
-      if (response.statusCode == 200) {
-        albums.add(
-          Album.fromJson(eachElement),
-        );
-      } else {
-        throw Exception(response.body);
+    if (response.statusCode == 200) {
+      for (var eachElement in decodedUrl) {
+        albums.add(Album.fromJson(eachElement));
       }
+    } else {
+      throw Exception(response.body);
     }
   } catch (exception) {
     throw Exception('Failed to fetch data from http package');
