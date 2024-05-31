@@ -8,10 +8,10 @@ class LoadingError extends StatefulWidget {
   final void Function() fetchData;
 
   @override
-  State<LoadingError> createState() => _LoadingError();
+  State<LoadingError> createState() => _LoadingErrorState();
 }
 
-class _LoadingError extends State<LoadingError> {
+class _LoadingErrorState extends State<LoadingError> {
   Timer? _timer;
   int _startCountdown = 6;
   bool _isVisible = false;

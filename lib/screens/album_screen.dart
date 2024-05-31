@@ -8,10 +8,10 @@ class AlbumScreen extends StatefulWidget {
   const AlbumScreen({super.key});
 
   @override
-  State<AlbumScreen> createState() => _AlbumScreeen();
+  State<AlbumScreen> createState() => _AlbumScreeenState();
 }
 
-class _AlbumScreeen extends State<AlbumScreen> {
+class _AlbumScreeenState extends State<AlbumScreen> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Album>>(

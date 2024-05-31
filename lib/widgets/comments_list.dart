@@ -14,19 +14,26 @@ class CommentsList extends StatelessWidget {
       itemBuilder: (context, index) => Padding(
         padding: const EdgeInsets.all(10),
         child: Card(
+          elevation: 1,
+          shadowColor: mainColorScheme.primary,
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               ListTile(
                 leading: const Icon(Icons.comment_outlined),
-                title: Text(snapshot.data![index].name,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),),
+                title: Text(
+                  snapshot.data![index].name,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 subtitle: Text(snapshot.data![index].body),
               ),
               Container(
-                padding: const EdgeInsets.only(right: 20, bottom: 10),
+                padding: const EdgeInsets.only(
+                  right: 20,
+                  bottom: 10,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[

@@ -7,10 +7,10 @@ class TabsScreen extends StatefulWidget {
   const TabsScreen({super.key});
 
   @override
-  State<TabsScreen> createState() => _TabsScreen();
+  State<TabsScreen> createState() => _TabsScreenState();
 }
 
-class _TabsScreen extends State<TabsScreen> {
+class _TabsScreenState extends State<TabsScreen> {
   int _currentIndex = 0;
   String _currentPageName = '';
   Widget _activeContent = Center(
