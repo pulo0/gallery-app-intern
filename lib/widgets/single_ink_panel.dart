@@ -1,10 +1,9 @@
 import 'dart:io';
-
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gallery_app/main.dart';
 import 'package:gallery_app/models/album.dart';
+import 'package:gallery_app/widgets/android_dialog.dart';
+import 'package:gallery_app/widgets/curpetino_dialog.dart';
 
 class SingleInkPanel extends StatefulWidget {
   const SingleInkPanel(this.snapshot, this.index, {super.key});
@@ -25,9 +24,22 @@ class _SingleInkPanelState extends State<SingleInkPanel> {
           borderRadius: BorderRadius.circular(15),
           color: const Color.fromARGB(31, 122, 121, 121),
           image: DecorationImage(
-            image:
-                CachedNetworkImageProvider(widget.snapshot.data![widget.index].thumbnailUrl,),
+            image: NetworkImage(
+              widget.snapshot.data![widget.index].thumbnailUrl,
+            ),
             fit: BoxFit.cover,
+            onError: (exception, stackTrace) {
+              return FlutterError.reportError(
+                FlutterErrorDetails(
+                  exception: exception,
+                  stack: stackTrace,
+                  library: 'Album image fetching',
+                  context: ErrorDescription(
+                    'Failed to fetch the image from http request',
+                  ),
+                ),
+              );
+            },
           ),
         ),
         child: InkWell(
@@ -43,67 +55,8 @@ class _SingleInkPanelState extends State<SingleInkPanel> {
     return showDialog(
       context: context,
       builder: (context) => Platform.isIOS
-          ? CupertinoAlertDialog(
-              title: Text(
-                widget.snapshot.data![widget.index].title,
-                style: mainTheme.textTheme.titleMedium!
-                    .copyWith(color: mainColorScheme.primary),
-              ),
-              content: Image.network(
-                widget.snapshot.data![widget.index].url,
-                fit: BoxFit.cover,
-                loadingBuilder: (context, child, loadingProgress) =>
-                    loadingProgress == null
-                        ? child
-                        : Center(
-                            child: CircularProgressIndicator(
-                              value: loadingProgress.expectedTotalBytes != null
-                                  ? loadingProgress.cumulativeBytesLoaded /
-                                      loadingProgress.expectedTotalBytes!
-                                  : null,
-                            ),
-                          ),
-              ),
-              actions: <Widget>[
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  child: const Text('Go back'),
-                ),
-              ],
-            )
-          : AlertDialog(
-              clipBehavior: Clip.antiAlias,
-              title: Text(
-                widget.snapshot.data![widget.index].title,
-                style: mainTheme.textTheme.titleMedium!
-                    .copyWith(color: mainColorScheme.primary),
-              ),
-              content: SizedBox(
-                height: 300,
-                width: 300,
-                child: Image.network(
-                  widget.snapshot.data![widget.index].url,
-                  fit: BoxFit.cover,
-                  loadingBuilder: (context, child, loadingProgress) =>
-                      loadingProgress == null
-                          ? child
-                          : Center(
-                              child: CircularProgressIndicator(
-                                value: loadingProgress.expectedTotalBytes != null
-                                    ? loadingProgress.cumulativeBytesLoaded /
-                                        loadingProgress.expectedTotalBytes!
-                                    : null,
-                              ),
-                            ),
-                ),
-              ),
-              actions: <Widget>[
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  child: const Text('Go back'),
-                ),
-              ],
-            ),
+          ? CupertinoDialog(widget.snapshot, widget.index)
+          : AndroidDialog(widget.snapshot, widget.index),
     );
   }
 }
