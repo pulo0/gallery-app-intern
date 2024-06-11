@@ -1,9 +1,7 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:gallery_app/main.dart';
 import 'package:gallery_app/models/album.dart';
-import 'package:gallery_app/widgets/android_dialog.dart';
-import 'package:gallery_app/widgets/curpetino_dialog.dart';
+import 'package:gallery_app/widgets/full_image_dialog.dart';
 
 class SingleInkPanel extends StatefulWidget {
   const SingleInkPanel(this.snapshot, this.index, {super.key});
@@ -18,6 +16,9 @@ class SingleInkPanel extends StatefulWidget {
 class _SingleInkPanelState extends State<SingleInkPanel> {
   @override
   Widget build(BuildContext context) {
+    final index = widget.index;
+    final snapshotData = widget.snapshot.data!;
+
     return Material(
       child: Ink(
         decoration: BoxDecoration(
@@ -25,7 +26,7 @@ class _SingleInkPanelState extends State<SingleInkPanel> {
           color: const Color.fromARGB(31, 122, 121, 121),
           image: DecorationImage(
             image: NetworkImage(
-              widget.snapshot.data![widget.index].thumbnailUrl,
+              snapshotData[index].thumbnailUrl,
             ),
             fit: BoxFit.cover,
             onError: (exception, stackTrace) {
@@ -54,9 +55,7 @@ class _SingleInkPanelState extends State<SingleInkPanel> {
   Future<void> _dialogShow(BuildContext context) {
     return showDialog(
       context: context,
-      builder: (context) => Platform.isIOS
-          ? CupertinoDialog(widget.snapshot, widget.index)
-          : AndroidDialog(widget.snapshot, widget.index),
+      builder: (context) => FullImageDialog(widget.snapshot, widget.index),
     );
   }
 }
