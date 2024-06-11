@@ -10,20 +10,26 @@ class FullImageDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const double measurements = 300;
+    final TextTheme textTheme = mainTheme.textTheme;
+    final snapshotData = snapshot.data!;
+
     return AlertDialog(
       clipBehavior: Clip.antiAlias,
       backgroundColor: mainColorScheme.surface.withOpacity(0.90),
       surfaceTintColor: mainColorScheme.surfaceBright,
       title: Text(
-        snapshot.data![index].title,
-        style: mainTheme.textTheme.titleMedium!
-            .copyWith(color: mainColorScheme.primary),
+        snapshotData[index].title,
+        style: textTheme.titleMedium!.copyWith(
+          color: mainColorScheme.primary,
+          fontWeight: FontWeight.w400,
+        ),
       ),
       content: SizedBox(
-        height: 300,
-        width: 300,
+        height: measurements,
+        width: measurements,
         child: Image.network(
-          snapshot.data![index].url,
+          snapshotData[index].url,
           fit: BoxFit.cover,
           loadingBuilder: (context, child, loadingProgress) =>
               loadingProgress == null

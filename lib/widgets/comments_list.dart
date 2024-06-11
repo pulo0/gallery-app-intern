@@ -9,6 +9,9 @@ class CommentsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextTheme textTheme = mainTheme.textTheme;
+    final snapshotData = snapshot.data!;
+
     return ListView.builder(
       itemCount: snapshot.data!.length,
       itemBuilder: (context, index) => Padding(
@@ -22,12 +25,12 @@ class CommentsList extends StatelessWidget {
               ListTile(
                 leading: const Icon(Icons.comment_outlined),
                 title: Text(
-                  snapshot.data![index].name,
+                  snapshotData[index].name,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                subtitle: Text(snapshot.data![index].body),
+                subtitle: Text(snapshotData[index].body),
               ),
               Container(
                 padding: const EdgeInsets.only(
@@ -38,8 +41,8 @@ class CommentsList extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     Text(
-                      snapshot.data![index].email,
-                      style: mainTheme.textTheme.bodyMedium!.copyWith(
+                      snapshotData[index].email,
+                      style: textTheme.bodyMedium!.copyWith(
                         color: mainColorScheme.secondary,
                         fontWeight: FontWeight.bold,
                       ),

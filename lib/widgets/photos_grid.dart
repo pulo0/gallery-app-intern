@@ -17,7 +17,7 @@ class PhotosGrid extends StatelessWidget {
         crossAxisSpacing: 19,
         mainAxisSpacing: 18,
       ),
-      itemCount: snapshot.data!.length,
+      itemCount: snapshot.data?.length ?? 0,
       itemBuilder: (context, index) => SingleInkPanel(snapshot, index),
     );
   }

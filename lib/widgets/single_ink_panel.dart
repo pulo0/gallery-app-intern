@@ -18,6 +18,7 @@ class _SingleInkPanelState extends State<SingleInkPanel> {
   Widget build(BuildContext context) {
     final index = widget.index;
     final snapshotData = widget.snapshot.data!;
+    final snapshotDataIndexed = snapshotData[index];
 
     return Material(
       child: Ink(
@@ -26,7 +27,7 @@ class _SingleInkPanelState extends State<SingleInkPanel> {
           color: const Color.fromARGB(31, 122, 121, 121),
           image: DecorationImage(
             image: NetworkImage(
-              snapshotData[index].thumbnailUrl,
+              snapshotDataIndexed.thumbnailUrl,
             ),
             fit: BoxFit.cover,
             onError: (exception, stackTrace) {

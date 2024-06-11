@@ -10,6 +10,8 @@ class TabsScreen extends StatefulWidget {
   State<TabsScreen> createState() => _TabsScreenState();
 }
 
+final TextTheme textTheme = mainTheme.textTheme;
+
 class _TabsScreenState extends State<TabsScreen> {
   int _currentIndex = 0;
   String _currentPageName = '';
@@ -22,8 +24,8 @@ class _TabsScreenState extends State<TabsScreen> {
           Text(
             'TODO: A list of thumbnails, don\'t worry...',
             textAlign: TextAlign.center,
-            style: mainTheme.textTheme.titleLarge,
-            ),
+            style: textTheme.titleLarge,
+          ),
           const SizedBox(height: 16),
           const CircularProgressIndicator(),
         ],
@@ -59,10 +61,9 @@ class _TabsScreenState extends State<TabsScreen> {
         onTap: setPage,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.photo_library_rounded),
-            label: 'Album',
-            tooltip: 'Display album of photos'
-          ),
+              icon: Icon(Icons.photo_library_rounded),
+              label: 'Album',
+              tooltip: 'Display album of photos'),
           BottomNavigationBarItem(
             icon: Icon(Icons.comment),
             label: 'Comments',

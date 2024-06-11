@@ -44,10 +44,11 @@ class _LoadingErrorState extends State<LoadingError> {
 
   @override
   Widget build(BuildContext context) {
+    final TextTheme textTheme = mainTheme.textTheme;
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+        children: <Widget>[
           const CircularProgressIndicator(),
           Padding(
             padding: const EdgeInsets.symmetric(
@@ -58,12 +59,12 @@ class _LoadingErrorState extends State<LoadingError> {
               firstChild: Text(
                 'Loading album from http request...',
                 textAlign: TextAlign.center,
-                style: mainTheme.textTheme.titleLarge,
+                style: textTheme.titleLarge,
               ),
               secondChild: Text(
                 'Restart fetching album data',
                 textAlign: TextAlign.center,
-                style: mainTheme.textTheme.titleLarge,
+                style: textTheme.titleLarge,
               ),
               crossFadeState: !_isVisible
                   ? CrossFadeState.showFirst
@@ -78,7 +79,7 @@ class _LoadingErrorState extends State<LoadingError> {
               onPressed: widget.fetchData,
               child: Text(
                 'Restart',
-                style: mainTheme.textTheme.labelMedium!.copyWith(
+                style: textTheme.labelMedium!.copyWith(
                   color: mainColorScheme.primary,
                 ),
               ),
