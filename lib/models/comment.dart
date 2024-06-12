@@ -1,3 +1,4 @@
+// Comment Model
 class Comment {
   Comment({
     required this.postId,
@@ -13,6 +14,7 @@ class Comment {
   final String email;
   final String body;
 
+  // A factory constructor that creates a Comment instance from a JSON object
   factory Comment.fromJson(Map<String, dynamic> json) {
     return switch (json) {
       {

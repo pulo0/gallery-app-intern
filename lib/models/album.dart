@@ -1,3 +1,4 @@
+// Album model
 class Album {
   Album({
     required this.albumId,
@@ -13,6 +14,7 @@ class Album {
   final String url;
   final String thumbnailUrl;
 
+  // A factory constructor that creates an Album instance from a JSON object
   factory Album.fromJson(Map<String, dynamic> json) {
     return switch (json) {
       {

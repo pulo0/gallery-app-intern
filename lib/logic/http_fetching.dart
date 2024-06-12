@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:gallery_app/models/album.dart';
 import 'package:gallery_app/models/comment.dart';
 
+// Path: lib/logic/http_fetching.dart
+// Fetching albums from the API (Temporary solution)
 Future<List<Album>> fetchAlbum() async {
   final url = Uri.parse('https://jsonplaceholder.typicode.com/photos');
   final response = await http.get(url);
@@ -24,6 +26,7 @@ Future<List<Album>> fetchAlbum() async {
   return albums;
 }
 
+// Fetching comments from the API (Temporary solution)
 Future<List<Comment>> fetchComment() async {
   final url = Uri.parse('https://jsonplaceholder.typicode.com/comments');
   final response = await http.get(url);
