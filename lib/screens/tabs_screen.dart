@@ -20,7 +20,7 @@ class _TabsScreenState extends State<TabsScreen> {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+        children: <Widget>[
           Text(
             'TODO: A list of thumbnails, don\'t worry...',
             textAlign: TextAlign.center,

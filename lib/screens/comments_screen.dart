@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gallery_app/models/comment.dart';
+import 'package:gallery_app/logic/http_fetching.dart';
 import 'package:gallery_app/widgets/comments_list.dart';
 import 'package:gallery_app/widgets/loading_error.dart';
 

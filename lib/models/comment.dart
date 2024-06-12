@@ -1,28 +1,3 @@
-import 'dart:async';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-
-Future<List<Comment>> fetchComment() async {
-  final url = Uri.parse('https://jsonplaceholder.typicode.com/comments');
-  final response = await http.get(url);
-  final decodedUrl = jsonDecode(response.body);
-  List<Comment> comments = [];
-
-  try {
-    if (response.statusCode == 200) {
-      for (var eachElement in decodedUrl) {
-        comments.add(Comment.fromJson(eachElement));
-      }
-    } else {
-      throw Exception(response.body);
-    }
-  } catch (exception) {
-    throw Exception('Failed to fetch data from http package');
-  }
-
-  return comments;
-}
-
 class Comment {
   Comment({
     required this.postId,
