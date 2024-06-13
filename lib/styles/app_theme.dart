@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-ThemeData mainTheme() => ThemeData(
-      colorScheme: ColorScheme.fromSeed(
+final colorScheme = ColorScheme.fromSeed(
         seedColor: const Color.fromARGB(255, 133, 46, 233),
         brightness: Brightness.dark,
-      ),
+      );
+
+ThemeData mainTheme() => ThemeData(
+      colorScheme: colorScheme,
       textTheme: GoogleFonts.abelTextTheme().copyWith(
         titleLarge: GoogleFonts.abel(
-          color: mainTheme().colorScheme.primary,
+          color: colorScheme.primary,
           fontSize: 26,
         ),
       ),
       appBarTheme: AppBarTheme(
         centerTitle: true,
-        backgroundColor: mainTheme().colorScheme.surfaceContainerLow,
+        backgroundColor: colorScheme.surfaceContainerLow,
       ),
     );
