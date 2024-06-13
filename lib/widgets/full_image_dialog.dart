@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gallery_app/logic/http_fetching.dart';
-import 'package:gallery_app/main.dart';
 import 'package:gallery_app/models/album.dart';
+import 'package:gallery_app/styles/app_theme.dart';
+import 'package:gallery_app/logic/http_fetching.dart';
 
 class FullImageDialog extends StatelessWidget {
   const FullImageDialog(this.snapshot, this.index, {super.key});
@@ -12,17 +12,18 @@ class FullImageDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const double measurements = 300;
-    final TextTheme textTheme = mainTheme.textTheme;
+    final TextTheme textTheme = mainTheme().textTheme;
+    final ColorScheme colorScheme = mainTheme().colorScheme;
     final snapshotData = snapshot.data!;
 
     return AlertDialog(
       clipBehavior: Clip.antiAlias,
-      backgroundColor: mainColorScheme.surface.withOpacity(0.90),
-      surfaceTintColor: mainColorScheme.surfaceBright,
+      backgroundColor: colorScheme.surface.withOpacity(0.90),
+      surfaceTintColor: colorScheme.surfaceBright,
       title: Text(
         snapshotData[index].title,
         style: textTheme.titleMedium!.copyWith(
-          color: mainColorScheme.primary,
+          color: colorScheme.primary,
           fontWeight: FontWeight.w400,
         ),
       ),
@@ -50,8 +51,8 @@ class FullImageDialog extends StatelessWidget {
                 Text(
                   'Failed to fetch',
                   textAlign: TextAlign.center,
-                  style: mainTheme.textTheme.bodyMedium!
-                      .copyWith(color: mainColorScheme.primary),
+                  style: textTheme.bodyMedium!
+                      .copyWith(color: colorScheme.primary),
                 ),
                 const TextButton(
                   onPressed: fetchAlbum,

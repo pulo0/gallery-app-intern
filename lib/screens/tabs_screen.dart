@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gallery_app/main.dart';
 import 'package:gallery_app/screens/album_screen.dart';
 import 'package:gallery_app/screens/comments_screen.dart';
+import 'package:gallery_app/styles/app_theme.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({super.key});
@@ -10,7 +10,7 @@ class TabsScreen extends StatefulWidget {
   State<TabsScreen> createState() => _TabsScreenState();
 }
 
-final TextTheme textTheme = mainTheme.textTheme;
+final TextTheme textTheme = mainTheme().textTheme;
 
 class _TabsScreenState extends State<TabsScreen> {
   int _currentIndex = 0;
@@ -61,9 +61,10 @@ class _TabsScreenState extends State<TabsScreen> {
         onTap: setPage,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-              icon: Icon(Icons.photo_library_rounded),
-              label: 'Album',
-              tooltip: 'Display album of photos'),
+            icon: Icon(Icons.photo_library_rounded),
+            label: 'Album',
+            tooltip: 'Display album of photos',
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.comment),
             label: 'Comments',

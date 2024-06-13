@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:gallery_app/main.dart';
+import 'package:gallery_app/styles/app_theme.dart';
 
 class LoadingError extends StatefulWidget {
   const LoadingError(this.fetchData, {super.key});
@@ -44,7 +44,8 @@ class _LoadingErrorState extends State<LoadingError> {
 
   @override
   Widget build(BuildContext context) {
-    final TextTheme textTheme = mainTheme.textTheme;
+    final TextTheme textTheme = mainTheme().textTheme;
+    final ColorScheme colorScheme = mainTheme().colorScheme;
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -80,7 +81,7 @@ class _LoadingErrorState extends State<LoadingError> {
               child: Text(
                 'Restart',
                 style: textTheme.labelMedium!.copyWith(
-                  color: mainColorScheme.primary,
+                  color: colorScheme.primary,
                 ),
               ),
             ),

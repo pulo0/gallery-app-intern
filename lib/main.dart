@@ -1,26 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gallery_app/screens/tabs_screen.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-final mainColorScheme = ColorScheme.fromSeed(
-  seedColor: const Color.fromARGB(255, 133, 46, 233),
-  brightness: Brightness.dark,
-);
-
-final mainTheme = ThemeData(
-  colorScheme: mainColorScheme,
-  textTheme: GoogleFonts.abelTextTheme().copyWith(
-    titleLarge: GoogleFonts.abel(
-      color: mainColorScheme.primary,
-      fontSize: 26,
-    )
-  ),
-  appBarTheme: AppBarTheme(
-    centerTitle: true,
-    backgroundColor: mainColorScheme.surfaceContainerLow,
-  ),
-);
+import 'package:gallery_app/styles/app_theme.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +17,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Gallerify',
-      theme: mainTheme,
+      theme: mainTheme(),
       home: const TabsScreen(),
     );
   }

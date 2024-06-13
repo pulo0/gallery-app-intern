@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gallery_app/main.dart';
+import 'package:gallery_app/styles/app_theme.dart';
 import 'package:gallery_app/models/comment.dart';
 
 class CommentsList extends StatelessWidget {
@@ -9,7 +9,8 @@ class CommentsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextTheme textTheme = mainTheme.textTheme;
+    final TextTheme textTheme = mainTheme().textTheme;
+    final ColorScheme colorScheme = mainTheme().colorScheme;
     final snapshotData = snapshot.data!;
 
     return ListView.builder(
@@ -18,7 +19,7 @@ class CommentsList extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         child: Card(
           elevation: 1,
-          shadowColor: mainColorScheme.primary,
+          shadowColor: colorScheme.primary,
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
@@ -43,7 +44,7 @@ class CommentsList extends StatelessWidget {
                     Text(
                       snapshotData[index].email,
                       style: textTheme.bodyMedium!.copyWith(
-                        color: mainColorScheme.secondary,
+                        color: colorScheme.secondary,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

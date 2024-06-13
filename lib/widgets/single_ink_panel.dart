@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gallery_app/main.dart';
 import 'package:gallery_app/models/album.dart';
+import 'package:gallery_app/styles/app_theme.dart';
 import 'package:gallery_app/widgets/full_image_dialog.dart';
 
 class SingleInkPanel extends StatefulWidget {
@@ -16,6 +16,7 @@ class SingleInkPanel extends StatefulWidget {
 class _SingleInkPanelState extends State<SingleInkPanel> {
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = mainTheme().colorScheme;
     final index = widget.index;
     final snapshotData = widget.snapshot.data!;
     final snapshotDataIndexed = snapshotData[index];
@@ -46,7 +47,7 @@ class _SingleInkPanelState extends State<SingleInkPanel> {
         ),
         child: InkWell(
           onTap: () => _dialogShow(context),
-          splashColor: mainColorScheme.tertiary.withOpacity(0.3),
+          splashColor: colorScheme.tertiary.withOpacity(0.3),
           borderRadius: BorderRadius.circular(15),
         ),
       ),
