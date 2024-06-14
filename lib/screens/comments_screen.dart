@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gallery_app/logic/http_fetching.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gallery_app/models/comment.dart';
+import 'package:gallery_app/logic/comment_cubit.dart';
 import 'package:gallery_app/widgets/comments_list.dart';
 import 'package:gallery_app/widgets/loading_error.dart';
 
@@ -8,11 +10,17 @@ class CommentsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: fetchComment(),
-      builder: (context, snapshot) => snapshot.hasData
-          ? CommentsList(snapshot)
-          : const LoadingError(fetchComment),
+    return BlocProvider(
+      create: (context) => CommentCubit()..fetchComments(),
+      child: BlocBuilder<CommentCubit, List<Comment>>(
+        builder: (context, state) {
+          if (state.isEmpty) {
+            return LoadingError(() => CommentCubit().fetchComments());
+          } else {
+            return CommentsList(state);
+          }
+        },
+      ),
     );
   }
 }

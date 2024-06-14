@@ -3,9 +3,9 @@ import 'package:gallery_app/models/album.dart';
 import 'package:gallery_app/widgets/single_ink_panel.dart';
 
 class PhotosGrid extends StatelessWidget {
-  const PhotosGrid(this.snapshot, {super.key});
+  const PhotosGrid(this.state, {super.key});
 
-  final AsyncSnapshot<List<Album>> snapshot;
+  final List<Album> state;
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +17,8 @@ class PhotosGrid extends StatelessWidget {
         crossAxisSpacing: 19,
         mainAxisSpacing: 18,
       ),
-      itemCount: snapshot.data?.length ?? 0,
-      itemBuilder: (context, index) => SingleInkPanel(snapshot, index),
+      itemCount: state.length,
+      itemBuilder: (context, index) => SingleInkPanel(state, index),
     );
   }
 }

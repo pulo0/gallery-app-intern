@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gallery_app/models/album.dart';
 import 'package:gallery_app/styles/app_theme.dart';
-import 'package:gallery_app/logic/http_fetching.dart';
+import 'package:gallery_app/logic/album_cubit.dart';
 
 class FullImageDialog extends StatelessWidget {
-  const FullImageDialog(this.snapshot, this.index, {super.key});
+  const FullImageDialog(this.state, this.index, {super.key});
 
-  final AsyncSnapshot<List<Album>> snapshot;
+  final List<Album> state;
   final int index;
 
   @override
@@ -14,14 +14,13 @@ class FullImageDialog extends StatelessWidget {
     const double measurements = 300;
     final TextTheme textTheme = mainTheme().textTheme;
     final ColorScheme colorScheme = mainTheme().colorScheme;
-    final snapshotData = snapshot.data!;
 
     return AlertDialog(
       clipBehavior: Clip.antiAlias,
       backgroundColor: colorScheme.surface.withOpacity(0.90),
       surfaceTintColor: colorScheme.surfaceBright,
       title: Text(
-        snapshotData[index].title,
+        state[index].title,
         style: textTheme.titleMedium!.copyWith(
           color: colorScheme.primary,
           fontWeight: FontWeight.w400,
@@ -31,7 +30,7 @@ class FullImageDialog extends StatelessWidget {
         height: measurements,
         width: measurements,
         child: Image.network(
-          snapshotData[index].url,
+          state[index].url,
           fit: BoxFit.cover,
           loadingBuilder: (context, child, loadingProgress) =>
               loadingProgress == null
@@ -54,9 +53,9 @@ class FullImageDialog extends StatelessWidget {
                   style: textTheme.bodyMedium!
                       .copyWith(color: colorScheme.primary),
                 ),
-                const TextButton(
-                  onPressed: fetchAlbum,
-                  child: Text(
+                TextButton(
+                  onPressed: () => AlbumCubit().fetchAlbums(),
+                  child: const Text(
                     'Retry',
                     style: TextStyle(fontSize: 18.5),
                   ),

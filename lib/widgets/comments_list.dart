@@ -3,18 +3,18 @@ import 'package:gallery_app/styles/app_theme.dart';
 import 'package:gallery_app/models/comment.dart';
 
 class CommentsList extends StatelessWidget {
-  const CommentsList(this.snapshot, {super.key});
+  const CommentsList(this.state, {super.key});
 
-  final AsyncSnapshot<List<Comment>> snapshot;
+  final List<Comment> state;
 
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = mainTheme().textTheme;
     final ColorScheme colorScheme = mainTheme().colorScheme;
-    final snapshotData = snapshot.data!;
+    final snapshotData = state;
 
     return ListView.builder(
-      itemCount: snapshot.data!.length,
+      itemCount: state.length,
       itemBuilder: (context, index) => Padding(
         padding: const EdgeInsets.all(10),
         child: Card(

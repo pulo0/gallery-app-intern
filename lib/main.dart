@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gallery_app/screens/tabs_screen.dart';
 import 'package:gallery_app/styles/app_theme.dart';
+import 'package:gallery_app/screens/tabs_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gallery_app/styles/app_theme.dart';
 import 'package:gallery_app/screens/album_screen.dart';
 import 'package:gallery_app/screens/comments_screen.dart';
-import 'package:gallery_app/styles/app_theme.dart';
 
 final TextTheme textTheme = mainTheme().textTheme;
 class TabsScreen extends StatefulWidget {

@@ -4,9 +4,9 @@ import 'package:gallery_app/styles/app_theme.dart';
 import 'package:gallery_app/widgets/full_image_dialog.dart';
 
 class SingleInkPanel extends StatefulWidget {
-  const SingleInkPanel(this.snapshot, this.index, {super.key});
+  const SingleInkPanel(this.state, this.index, {super.key});
 
-  final AsyncSnapshot<List<Album>> snapshot;
+  final List<Album> state;
   final int index;
 
   @override
@@ -18,7 +18,7 @@ class _SingleInkPanelState extends State<SingleInkPanel> {
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = mainTheme().colorScheme;
     final index = widget.index;
-    final snapshotData = widget.snapshot.data!;
+    final snapshotData = widget.state;
     final snapshotDataIndexed = snapshotData[index];
 
     return Material(
@@ -57,7 +57,7 @@ class _SingleInkPanelState extends State<SingleInkPanel> {
   Future<void> _dialogShow(BuildContext context) {
     return showDialog(
       context: context,
-      builder: (context) => FullImageDialog(widget.snapshot, widget.index),
+      builder: (context) => FullImageDialog(widget.state, widget.index),
     );
   }
 }
