@@ -26,7 +26,8 @@ class AlbumCubit extends Cubit<List<Album>> {
         throw Exception(response.body);
       }
     } catch (exception) {
-      throw Exception('Failed to fetch data, more details ${exception.toString()}');
+      throw Exception(
+          'Failed to fetch data, more details ${exception.toString()}');
     }
   }
 }
