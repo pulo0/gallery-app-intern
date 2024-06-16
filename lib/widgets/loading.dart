@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:gallery_app/styles/app_theme.dart';
 import 'package:gallery_app/logic/album_state.dart';
 import 'package:gallery_app/logic/comment_state.dart';
-import 'package:gallery_app/styles/app_theme.dart';
 
 class Loading extends StatefulWidget {
   const Loading(

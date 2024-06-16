@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gallery_app/logic/album_state.dart';
-import 'package:gallery_app/logic/comment_cubit.dart';
 import 'package:gallery_app/styles/app_theme.dart';
 import 'package:gallery_app/logic/album_cubit.dart';
+import 'package:gallery_app/logic/comment_cubit.dart';
+import 'package:gallery_app/logic/album_state.dart';
 import 'package:gallery_app/logic/comment_state.dart';
 
 class Error extends StatelessWidget {
@@ -30,7 +30,9 @@ class Error extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            albumState != null ? albumState!.errorMessage : commentState!.errorMessage,
+            albumState != null
+                ? albumState!.errorMessage
+                : commentState!.errorMessage,
             textAlign: TextAlign.center,
             style: textTheme.titleLarge,
           ),

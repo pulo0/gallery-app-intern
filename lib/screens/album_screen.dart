@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery_app/logic/album_state.dart';
 import 'package:gallery_app/logic/album_cubit.dart';
+import 'package:gallery_app/widgets/photos_grid.dart';
 import 'package:gallery_app/widgets/loading.dart';
 import 'package:gallery_app/widgets/error.dart';
-import 'package:gallery_app/widgets/photos_grid.dart';
 
 class AlbumScreen extends StatefulWidget {
   const AlbumScreen({super.key});

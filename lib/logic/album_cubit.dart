@@ -1,8 +1,8 @@
 import 'dart:convert';
-import 'package:gallery_app/logic/album_state.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery_app/models/album.dart';
+import 'package:gallery_app/logic/album_state.dart';
 
 // Path: lib/logic/album_cubit.dart
 // Fetching albums from the API using http package and Bloc
@@ -32,7 +32,8 @@ class AlbumCubit extends Cubit<AlbumState> {
         emit(
           state.copyWith(
             status: AlbumStatus.error,
-            errorMessage: 'Failed to fetch data, please check your internet connection and try again.',
+            errorMessage:
+                'Failed to fetch data, please check your internet connection and try again.',
           ),
         );
       }
