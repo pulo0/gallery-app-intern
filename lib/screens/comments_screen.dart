@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gallery_app/models/comment.dart';
+import 'package:gallery_app/logic/comment_state.dart';
 import 'package:gallery_app/logic/comment_cubit.dart';
 import 'package:gallery_app/widgets/comments_list.dart';
 import 'package:gallery_app/widgets/loading.dart';
+import 'package:gallery_app/widgets/error.dart';
 
 class CommentsScreen extends StatelessWidget {
   const CommentsScreen({super.key});
@@ -12,12 +13,17 @@ class CommentsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => CommentCubit()..fetchComments(),
-      child: BlocBuilder<CommentCubit, List<Comment>>(
+      child: BlocBuilder<CommentCubit, CommentState>(
         builder: (context, state) {
-          if (state.isEmpty) {
-            return Loading(() => CommentCubit().fetchComments());
-          } else {
-            return CommentsList(state);
+          switch (state.status) {
+            case CommentStatus.initial:
+              return const Center(child: CircularProgressIndicator());
+            case CommentStatus.loading:
+              return Loading(() => CommentCubit().fetchComments());
+            case CommentStatus.loaded:
+              return CommentsList(state.comments);
+            case CommentStatus.error:
+              return Error(commentState: state);
           }
         },
       ),

@@ -1,15 +1,16 @@
 import 'dart:convert';
+import 'package:gallery_app/logic/comment_state.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery_app/models/comment.dart';
 
 // Path: lib/logic/comment_cubit.dart
 // Fetching comments from the API using http package and Bloc
-class CommentCubit extends Cubit<List<Comment>> {
-  CommentCubit() : super(<Comment>[]);
+class CommentCubit extends Cubit<CommentState> {
+  CommentCubit() : super(CommentState());
 
   Future<void> fetchComments() async {
-    emit(<Comment>[]);
+    emit(state.copyWith(status: CommentStatus.loading));
     final url = Uri.parse('https://jsonplaceholder.typicode.com/comments');
     final response = await http.get(url);
 
@@ -21,12 +22,28 @@ class CommentCubit extends Cubit<List<Comment>> {
         final List<dynamic> data = jsonDecode(response.body);
         final List<Comment> comments =
             data.map((eachElement) => Comment.fromJson(eachElement)).toList();
-        emit(comments);
+        emit(
+          state.copyWith(
+            comments: comments,
+            status: CommentStatus.loaded,
+          ),
+        );
       } else {
-        throw Exception(response.body);
+        emit(
+          state.copyWith(
+            status: CommentStatus.error,
+            errorMessage: Exception(response.body).toString(),
+          ),
+        );
       }
     } catch (exception) {
-      throw Exception('Failed to fetch data, more details ${exception.toString()}');
+      emit(
+        state.copyWith(
+          status: CommentStatus.error,
+          errorMessage:
+              "Failed to fetch data, more details ${exception.toString()}",
+        ),
+      );
     }
   }
 }

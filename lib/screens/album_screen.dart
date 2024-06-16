@@ -28,7 +28,7 @@ class _AlbumScreeenState extends State<AlbumScreen> {
             case AlbumStatus.finished:
               return PhotosGrid(state.albums);
             case AlbumStatus.error:
-              return Error(state);
+              return Error(albumState: state);
           }
         },
       ),
