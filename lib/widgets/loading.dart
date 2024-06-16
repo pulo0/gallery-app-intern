@@ -2,16 +2,16 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:gallery_app/styles/app_theme.dart';
 
-class LoadingError extends StatefulWidget {
-  const LoadingError(this.fetchData, {super.key});
+class Loading extends StatefulWidget {
+  const Loading(this.fetchData, {super.key});
 
   final void Function() fetchData;
 
   @override
-  State<LoadingError> createState() => _LoadingErrorState();
+  State<Loading> createState() => _LoadingState();
 }
 
-class _LoadingErrorState extends State<LoadingError> {
+class _LoadingState extends State<Loading> {
   Timer? _timer;
   int _startCountdown = 6;
   bool _isVisible = false;

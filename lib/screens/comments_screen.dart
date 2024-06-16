@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery_app/models/comment.dart';
 import 'package:gallery_app/logic/comment_cubit.dart';
 import 'package:gallery_app/widgets/comments_list.dart';
-import 'package:gallery_app/widgets/loading_error.dart';
+import 'package:gallery_app/widgets/loading.dart';
 
 class CommentsScreen extends StatelessWidget {
   const CommentsScreen({super.key});
@@ -15,7 +15,7 @@ class CommentsScreen extends StatelessWidget {
       child: BlocBuilder<CommentCubit, List<Comment>>(
         builder: (context, state) {
           if (state.isEmpty) {
-            return LoadingError(() => CommentCubit().fetchComments());
+            return Loading(() => CommentCubit().fetchComments());
           } else {
             return CommentsList(state);
           }

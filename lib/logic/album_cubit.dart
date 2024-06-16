@@ -1,15 +1,16 @@
 import 'dart:convert';
+import 'package:gallery_app/logic/album_state.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery_app/models/album.dart';
 
 // Path: lib/logic/album_cubit.dart
 // Fetching albums from the API using http package and Bloc
-class AlbumCubit extends Cubit<List<Album>> {
-  AlbumCubit() : super(<Album>[]);
+class AlbumCubit extends Cubit<AlbumState> {
+  AlbumCubit() : super(AlbumState());
 
   Future<void> fetchAlbums() async {
-    emit(<Album>[]);
+    emit(state.copyWith(status: AlbumStatus.loading));
     final url = Uri.parse('https://jsonplaceholder.typicode.com/photos');
     final response = await http.get(url);
 
@@ -21,13 +22,28 @@ class AlbumCubit extends Cubit<List<Album>> {
         final List<dynamic> data = jsonDecode(response.body);
         final List<Album> albums =
             data.map((eachElement) => Album.fromJson(eachElement)).toList();
-        emit(albums);
+        emit(
+          state.copyWith(
+            albums: albums,
+            status: AlbumStatus.finished,
+          ),
+        );
       } else {
-        throw Exception(response.body);
+        emit(
+          state.copyWith(
+            status: AlbumStatus.error,
+            errorMessage: Exception(response.body).toString(),
+          ),
+        );
       }
     } catch (exception) {
-      throw Exception(
-          'Failed to fetch data, more details ${exception.toString()}');
+      emit(
+        state.copyWith(
+          status: AlbumStatus.error,
+          errorMessage:
+              "Failed to fetch data, more details ${exception.toString()}",
+        ),
+      );
     }
   }
 }
