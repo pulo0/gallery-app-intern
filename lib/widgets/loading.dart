@@ -1,11 +1,20 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:gallery_app/logic/album_state.dart';
+import 'package:gallery_app/logic/comment_state.dart';
 import 'package:gallery_app/styles/app_theme.dart';
 
 class Loading extends StatefulWidget {
-  const Loading(this.fetchData, {super.key});
+  const Loading(
+    this.fetchData, {
+    super.key,
+    this.albumState,
+    this.commentState,
+  });
 
   final void Function() fetchData;
+  final AlbumState? albumState;
+  final CommentState? commentState;
 
   @override
   State<Loading> createState() => _LoadingState();
@@ -58,12 +67,14 @@ class _LoadingState extends State<Loading> {
             ),
             child: AnimatedCrossFade(
               firstChild: Text(
-                'Loading album from http request...',
+                widget.albumState == null
+                    ? 'Loading comments from http request...'
+                    : 'Loading album from http request...',
                 textAlign: TextAlign.center,
                 style: textTheme.titleLarge,
               ),
               secondChild: Text(
-                'Restart fetching album data',
+                widget.albumState == null ? 'Restart fetching comment data' : 'Restart fetching album data',
                 textAlign: TextAlign.center,
                 style: textTheme.titleLarge,
               ),
