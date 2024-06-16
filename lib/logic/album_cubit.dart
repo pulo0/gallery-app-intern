@@ -32,7 +32,7 @@ class AlbumCubit extends Cubit<AlbumState> {
         emit(
           state.copyWith(
             status: AlbumStatus.error,
-            errorMessage: Exception(response.body).toString(),
+            errorMessage: 'Failed to fetch data, please check your internet connection and try again.',
           ),
         );
       }
@@ -41,7 +41,7 @@ class AlbumCubit extends Cubit<AlbumState> {
         state.copyWith(
           status: AlbumStatus.error,
           errorMessage:
-              "Failed to fetch data, more details ${exception.toString()}",
+              "Failed to fetch data, please check your internet connection and try again. More details ${exception.toString()}",
         ),
       );
     }

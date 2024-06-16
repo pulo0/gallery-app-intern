@@ -32,7 +32,7 @@ class CommentCubit extends Cubit<CommentState> {
         emit(
           state.copyWith(
             status: CommentStatus.error,
-            errorMessage: Exception(response.body).toString(),
+            errorMessage: 'Failed to fetch data, please check your internet connection and try again.',
           ),
         );
       }
@@ -41,7 +41,7 @@ class CommentCubit extends Cubit<CommentState> {
         state.copyWith(
           status: CommentStatus.error,
           errorMessage:
-              "Failed to fetch data, more details ${exception.toString()}",
+              "Failed to fetch data, please check your internet connection and try again. More details ${exception.toString()}",
         ),
       );
     }

@@ -30,7 +30,8 @@ class Error extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            'Failed to fetch data, more details ${albumState != null ? albumState!.errorMessage : commentState!.errorMessage}',
+            albumState != null ? albumState!.errorMessage : commentState!.errorMessage,
+            textAlign: TextAlign.center,
             style: textTheme.titleLarge,
           ),
           const SizedBox(height: 10),
