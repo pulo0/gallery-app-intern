@@ -25,7 +25,7 @@ class CommentCubit extends Cubit<CommentState> {
         emit(
           state.copyWith(
             comments: comments,
-            status: CommentStatus.loaded,
+            status: CommentStatus.finished,
           ),
         );
       } else {

@@ -23,7 +23,7 @@ class CommentsScreen extends StatelessWidget {
                 commentState: state,
                 () => CommentCubit().fetchComments(),
               );
-            case CommentStatus.loaded:
+            case CommentStatus.finished:
               return CommentsList(state.comments);
             case CommentStatus.error:
               return Error(commentState: state);

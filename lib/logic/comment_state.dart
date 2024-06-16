@@ -3,7 +3,7 @@ import 'package:gallery_app/models/comment.dart';
 enum CommentStatus {
   initial,
   loading,
-  loaded,
+  finished,
   error,
 }
 
