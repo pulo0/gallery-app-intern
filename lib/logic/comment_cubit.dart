@@ -11,6 +11,8 @@ class CommentCubit extends Cubit<CommentState> {
 
   Future<void> fetchComments() async {
     emit(state.copyWith(status: CommentStatus.loading));
+    const errorMsg = 'Failed to fetch data, please check your internet connection and try again.';
+    const exceptionMsg = 'Failed to fetch data. More details:';
     final url = Uri.parse('https://jsonplaceholder.typicode.com/comments');
     final response = await http.get(url);
 
@@ -33,7 +35,7 @@ class CommentCubit extends Cubit<CommentState> {
           state.copyWith(
             status: CommentStatus.error,
             errorMessage:
-                'Failed to fetch data, please check your internet connection and try again.',
+                errorMsg,
           ),
         );
       }
@@ -42,7 +44,7 @@ class CommentCubit extends Cubit<CommentState> {
         state.copyWith(
           status: CommentStatus.error,
           errorMessage:
-              "Failed to fetch data, please check your internet connection and try again. More details ${exception.toString()}",
+              '$exceptionMsg ${exception.toString()}',
         ),
       );
     }
