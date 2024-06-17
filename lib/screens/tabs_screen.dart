@@ -53,6 +53,11 @@ class _TabsScreenState extends State<TabsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(_currentPageName),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(15),
+          ),
+        ),
         elevation: 1,
       ),
       body: _activeContent,
@@ -63,12 +68,12 @@ class _TabsScreenState extends State<TabsScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.photo_library_rounded),
             label: 'Album',
-            tooltip: 'Display album of photos',
+            tooltip: 'Album Section of photos',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.comment),
             label: 'Comments',
-            tooltip: 'Comment Section of photos',
+            tooltip: 'Comment Section',
           ),
         ],
       ),
