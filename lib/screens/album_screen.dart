@@ -10,10 +10,10 @@ class AlbumScreen extends StatefulWidget {
   const AlbumScreen({super.key});
 
   @override
-  State<AlbumScreen> createState() => _AlbumScreeenState();
+  State<AlbumScreen> createState() => _AlbumScreenState();
 }
 
-class _AlbumScreeenState extends State<AlbumScreen> {
+class _AlbumScreenState extends State<AlbumScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

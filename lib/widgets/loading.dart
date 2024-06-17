@@ -74,7 +74,9 @@ class _LoadingState extends State<Loading> {
                 style: textTheme.titleLarge,
               ),
               secondChild: Text(
-                widget.albumState == null ? 'Restart fetching comment data' : 'Restart fetching album data',
+                widget.albumState == null
+                    ? 'Restart fetching comment data'
+                    : 'Restart fetching album data',
                 textAlign: TextAlign.center,
                 style: textTheme.titleLarge,
               ),

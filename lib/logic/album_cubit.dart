@@ -11,16 +11,16 @@ class AlbumCubit extends Cubit<AlbumState> {
 
   Future<void> fetchAlbums() async {
     emit(state.copyWith(status: AlbumStatus.loading));
-    const errorMsg = 'Failed to fetch data, please check your internet connection and try again.';
-    const exceptionMsg = 'Failed to fetch data. More details:';
+    const failedFetchMsg = 'Failed to fetch data.';
+    const connErrorMsg = 'Please check your internet connection and try again.';
     final url = Uri.parse('https://jsonplaceholder.typicode.com/photos');
     final response = await http.get(url);
 
     // If the server returns a 200 status code response, then parse the JSON.
     try {
       if (response.statusCode == 200) {
-        // data variable is for converting the response body to a List<dynamic>
-        // albums variable is fort converting the List<dynamic> data to List<Album>
+        // data for converting the response body to a List<dynamic>
+        // albums for converting the List<dynamic> data to List<Album>
         final List<dynamic> data = jsonDecode(response.body);
         final List<Album> albums =
             data.map((eachElement) => Album.fromJson(eachElement)).toList();
@@ -34,8 +34,7 @@ class AlbumCubit extends Cubit<AlbumState> {
         emit(
           state.copyWith(
             status: AlbumStatus.error,
-            errorMessage:
-                errorMsg,
+            errorMessage: '$failedFetchMsg $connErrorMsg',
           ),
         );
       }
@@ -43,8 +42,7 @@ class AlbumCubit extends Cubit<AlbumState> {
       emit(
         state.copyWith(
           status: AlbumStatus.error,
-          errorMessage:
-              '$exceptionMsg ${exception.toString()}',
+          errorMessage: '$failedFetchMsg More details: ${exception.toString()}',
         ),
       );
     }

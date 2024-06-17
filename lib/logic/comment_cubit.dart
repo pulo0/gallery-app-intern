@@ -11,16 +11,16 @@ class CommentCubit extends Cubit<CommentState> {
 
   Future<void> fetchComments() async {
     emit(state.copyWith(status: CommentStatus.loading));
-    const errorMsg = 'Failed to fetch data, please check your internet connection and try again.';
-    const exceptionMsg = 'Failed to fetch data. More details:';
+    const failedFetchMsg = 'Failed to fetch data.';
+    const connErrorMsg = 'Please check your internet connection and try again.';
     final url = Uri.parse('https://jsonplaceholder.typicode.com/comments');
     final response = await http.get(url);
 
     // If the server returns a 200 status code response, then parse the JSON.
     try {
       if (response.statusCode == 200) {
-        // data variable is for converting the response body to a List<dynamic>
-        // albums variable is fort converting the List<dynamic> data to List<Comment>
+        // data for converting the response body to a List<dynamic>
+        // albums for converting the List<dynamic> data to List<Comment>
         final List<dynamic> data = jsonDecode(response.body);
         final List<Comment> comments =
             data.map((eachElement) => Comment.fromJson(eachElement)).toList();
@@ -34,8 +34,7 @@ class CommentCubit extends Cubit<CommentState> {
         emit(
           state.copyWith(
             status: CommentStatus.error,
-            errorMessage:
-                errorMsg,
+            errorMessage: '$failedFetchMsg $connErrorMsg',
           ),
         );
       }
@@ -43,8 +42,7 @@ class CommentCubit extends Cubit<CommentState> {
       emit(
         state.copyWith(
           status: CommentStatus.error,
-          errorMessage:
-              '$exceptionMsg ${exception.toString()}',
+          errorMessage: '$failedFetchMsg More details: ${exception.toString()}',
         ),
       );
     }
