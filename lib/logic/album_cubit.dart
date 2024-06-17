@@ -11,6 +11,8 @@ class AlbumCubit extends Cubit<AlbumState> {
 
   Future<void> fetchAlbums() async {
     emit(state.copyWith(status: AlbumStatus.loading));
+    const errorMsg = 'Failed to fetch data, please check your internet connection and try again.';
+    const exceptionMsg = 'Failed to fetch data. More details:';
     final url = Uri.parse('https://jsonplaceholder.typicode.com/photos');
     final response = await http.get(url);
 
@@ -33,7 +35,7 @@ class AlbumCubit extends Cubit<AlbumState> {
           state.copyWith(
             status: AlbumStatus.error,
             errorMessage:
-                'Failed to fetch data, please check your internet connection and try again.',
+                errorMsg,
           ),
         );
       }
@@ -42,7 +44,7 @@ class AlbumCubit extends Cubit<AlbumState> {
         state.copyWith(
           status: AlbumStatus.error,
           errorMessage:
-              "Failed to fetch data, please check your internet connection and try again. More details ${exception.toString()}",
+              '$exceptionMsg ${exception.toString()}',
         ),
       );
     }
