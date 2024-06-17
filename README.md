@@ -9,12 +9,14 @@ If you don't have it yet, you can find the instructions on how to install it [he
 
 With the Flutter SDK installed, you can run the project by executing the following command in the project's root folder:
 
-```flutter run```
+```
+flutter run
+```
 
 ## The purpose of the project
 
 Mainly the initial idea of a project is to create a simple gallery app that fetches images from the internet and displays them in a grid. Also on the second screen - comments list fetched by http request of a JSON file. The app should have three screens (in my case):
 
-1. [albums_screen.dart] - gallery screen that displays the images in a grid.
-2. [comments_screen.dart] - list of comments.
-3. [tabs_screen.dart] - navigation between those two screens.
+**1.** ```albums_screen.dart``` - gallery screen that displays the images in a grid.
+**2.** ```comments_screen.dart``` - list of comments.
+**3.** ```tabs_screen.dart``` - navigation between those two screens.
