@@ -1,5 +1,16 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'album.g.dart';
+
 // Album model
+@JsonSerializable()
 class Album {
+  final int albumId;
+  final int id;
+  final String title;
+  final String url;
+  final String thumbnailUrl;
+
   Album({
     required this.albumId,
     required this.id,
@@ -8,30 +19,8 @@ class Album {
     required this.thumbnailUrl,
   });
 
-  final int albumId;
-  final int id;
-  final String title;
-  final String url;
-  final String thumbnailUrl;
-
   // A factory constructor that creates an Album instance from a JSON object
-  factory Album.fromJson(Map<String, dynamic> json) {
-    return switch (json) {
-      {
-        'albumId': int albumId,
-        'id': int id,
-        'title': String title,
-        'url': String url,
-        'thumbnailUrl': String thumbnailUrl,
-      } =>
-        Album(
-          albumId: albumId,
-          id: id,
-          title: title,
-          url: url,
-          thumbnailUrl: thumbnailUrl,
-        ),
-      _ => throw const FormatException('Failed to load...'),
-    };
-  }
+  factory Album.fromJson(Map<String, dynamic> json) => _$AlbumFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AlbumToJson(this);
 }
