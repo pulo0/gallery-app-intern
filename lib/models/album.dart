@@ -2,7 +2,10 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'album.g.dart';
 
-// Album model
+// Album Model
+// The @JsonSerializable() annotation tells the 
+// json_serializable package to generate code for this class
+// in album.g.dart file
 @JsonSerializable()
 class Album {
   final int albumId;
@@ -22,5 +25,6 @@ class Album {
   // A factory constructor that creates an Album instance from a JSON object
   factory Album.fromJson(Map<String, dynamic> json) => _$AlbumFromJson(json);
 
+  // A method that converts an Album instance into a JSON object
   Map<String, dynamic> toJson() => _$AlbumToJson(this);
 }
