@@ -30,9 +30,9 @@ class Error extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            albumState != null
-                ? albumState!.errorMessage
-                : commentState!.errorMessage,
+            albumState is ErrorAlbumState
+                ? (albumState as ErrorAlbumState).errorMessage
+                : (commentState as ErrorCommentState).errorMessage,
             textAlign: TextAlign.center,
             style: textTheme.titleLarge,
           ),

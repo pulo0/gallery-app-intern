@@ -7,10 +7,10 @@ import 'package:gallery_app/logic/album_state.dart';
 // Path: lib/logic/album_cubit.dart
 // Fetching albums from the API using http package and Bloc
 class AlbumCubit extends Cubit<AlbumState> {
-  AlbumCubit() : super(AlbumState());
+  AlbumCubit() : super(InitialAlbumState());
 
   Future<void> fetchAlbums() async {
-    emit(state.copyWith(status: AlbumStatus.loading));
+    emit(LoadingAlbumState());
     const failedFetchMsg = 'Failed to fetch data.';
     const connErrorMsg = 'Please check your internet connection and try again.';
     final url = Uri.parse('https://jsonplaceholder.typicode.com/photos');
@@ -25,23 +25,20 @@ class AlbumCubit extends Cubit<AlbumState> {
         final List<Album> albums =
             data.map((eachElement) => Album.fromJson(eachElement)).toList();
         emit(
-          state.copyWith(
+          LoadedAlbumState(
             albums: albums,
-            status: AlbumStatus.finished,
           ),
         );
       } else {
         emit(
-          state.copyWith(
-            status: AlbumStatus.error,
+          ErrorAlbumState(
             errorMessage: '$failedFetchMsg $connErrorMsg',
           ),
         );
       }
     } catch (exception) {
       emit(
-        state.copyWith(
-          status: AlbumStatus.error,
+        ErrorAlbumState(
           errorMessage: '$failedFetchMsg More details: ${exception.toString()}',
         ),
       );

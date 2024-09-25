@@ -7,10 +7,10 @@ import 'package:gallery_app/logic/comment_state.dart';
 // Path: lib/logic/comment_cubit.dart
 // Fetching comments from the API using http package and Bloc
 class CommentCubit extends Cubit<CommentState> {
-  CommentCubit() : super(CommentState());
+  CommentCubit() : super(InitialCommentState());
 
   Future<void> fetchComments() async {
-    emit(state.copyWith(status: CommentStatus.loading));
+    emit(LoadingCommentState());
     const failedFetchMsg = 'Failed to fetch data.';
     const connErrorMsg = 'Please check your internet connection and try again.';
     final url = Uri.parse('https://jsonplaceholder.typicode.com/comments');
@@ -25,23 +25,20 @@ class CommentCubit extends Cubit<CommentState> {
         final List<Comment> comments =
             data.map((eachElement) => Comment.fromJson(eachElement)).toList();
         emit(
-          state.copyWith(
+          LoadedCommentState(
             comments: comments,
-            status: CommentStatus.finished,
           ),
         );
       } else {
         emit(
-          state.copyWith(
-            status: CommentStatus.error,
+          ErrorCommentState(
             errorMessage: '$failedFetchMsg $connErrorMsg',
           ),
         );
       }
     } catch (exception) {
       emit(
-        state.copyWith(
-          status: CommentStatus.error,
+        ErrorCommentState(
           errorMessage: '$failedFetchMsg More details: ${exception.toString()}',
         ),
       );

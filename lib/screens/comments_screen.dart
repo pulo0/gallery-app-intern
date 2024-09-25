@@ -15,18 +15,19 @@ class CommentsScreen extends StatelessWidget {
       create: (context) => CommentCubit()..fetchComments(),
       child: BlocBuilder<CommentCubit, CommentState>(
         builder: (context, state) {
-          switch (state.status) {
-            case CommentStatus.initial:
-              return const Center(child: CircularProgressIndicator());
-            case CommentStatus.loading:
-              return Loading(
-                commentState: state,
-                () => CommentCubit().fetchComments(),
-              );
-            case CommentStatus.finished:
-              return CommentsList(state.comments);
-            case CommentStatus.error:
-              return Error(commentState: state);
+          if (state is InitialCommentState) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is LoadingCommentState) {
+            return Loading(
+              commentState: state,
+              () => CommentCubit().fetchComments(),
+            );
+          } else if (state is LoadedCommentState) {
+            return CommentsList(state.comments);
+          } else if (state is ErrorCommentState) {
+            return Error(commentState: state);
+          } else {
+            return const Center(child: Text('Unknown state'));
           }
         },
       ),

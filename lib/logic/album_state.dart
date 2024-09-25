@@ -1,31 +1,19 @@
 import 'package:gallery_app/models/album.dart';
 
-enum AlbumStatus {
-  initial,
-  loading,
-  finished,
-  error,
+abstract class AlbumState {}
+
+class InitialAlbumState extends AlbumState {}
+
+class LoadingAlbumState extends AlbumState {}
+
+class LoadedAlbumState extends AlbumState {
+  final List<Album> albums;
+
+  LoadedAlbumState({required this.albums});
 }
 
-class AlbumState {
-  final List<Album> albums;
-  final AlbumStatus status;
+class ErrorAlbumState extends AlbumState {
   final String errorMessage;
 
-  AlbumState({
-    this.albums = const <Album>[],
-    this.status = AlbumStatus.initial,
-    this.errorMessage = '',
-  });
-
-  AlbumState copyWith({
-    List<Album>? albums,
-    AlbumStatus? status,
-    String? errorMessage,
-  }) =>
-      AlbumState(
-        albums: albums ?? this.albums,
-        status: status ?? this.status,
-        errorMessage: errorMessage ?? this.errorMessage,
-      );
+  ErrorAlbumState({required this.errorMessage});
 }

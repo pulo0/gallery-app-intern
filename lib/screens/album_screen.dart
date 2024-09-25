@@ -20,18 +20,19 @@ class _AlbumScreenState extends State<AlbumScreen> {
       create: (context) => AlbumCubit()..fetchAlbums(),
       child: BlocBuilder<AlbumCubit, AlbumState>(
         builder: (context, state) {
-          switch (state.status) {
-            case AlbumStatus.initial:
-              return const Center(child: CircularProgressIndicator());
-            case AlbumStatus.loading:
-              return Loading(
-                albumState: state,
-                () => AlbumCubit().fetchAlbums(),
-              );
-            case AlbumStatus.finished:
-              return PhotosGrid(state.albums);
-            case AlbumStatus.error:
-              return Error(albumState: state);
+          if (state is InitialAlbumState) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is LoadingAlbumState) {
+            return Loading(
+              albumState: state,
+              () => AlbumCubit().fetchAlbums(),
+            );
+          } else if (state is LoadedAlbumState) {
+            return PhotosGrid(state.albums);
+          } else if (state is ErrorAlbumState) {
+            return Error(albumState: state);
+          } else {
+            return const Center(child: Text('Unknown state'));
           }
         },
       ),
