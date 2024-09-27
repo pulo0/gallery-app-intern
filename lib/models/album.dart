@@ -8,12 +8,14 @@ part 'album.g.dart';
 // in album.g.dart file
 @JsonSerializable()
 class Album {
+  // The fields of the Album class
   final int albumId;
   final int id;
   final String title;
   final String url;
   final String thumbnailUrl;
 
+  // A constructor for the Album class
   Album({
     required this.albumId,
     required this.id,

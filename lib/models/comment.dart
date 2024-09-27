@@ -5,12 +5,14 @@ part 'comment.g.dart';
 // Comment Model
 @JsonSerializable()
 class Comment {
+  // The fields of the Comment class
   final int postId;
   final int id;
   final String name;
   final String email;
   final String body;
 
+  // A constructor for the Comment class
   Comment({
     required this.postId,
     required this.id,
