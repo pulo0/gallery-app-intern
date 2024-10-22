@@ -54,7 +54,6 @@ class _LoadingState extends State<Loading> {
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = mainTheme().textTheme;
-    final ColorScheme colorScheme = mainTheme().colorScheme;
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -84,19 +83,6 @@ class _LoadingState extends State<Loading> {
                   ? CrossFadeState.showFirst
                   : CrossFadeState.showSecond,
               duration: const Duration(milliseconds: 250),
-            ),
-          ),
-          AnimatedOpacity(
-            opacity: _isVisible ? 1.0 : 0.0,
-            duration: const Duration(milliseconds: 250),
-            child: ElevatedButton(
-              onPressed: widget.fetchData,
-              child: Text(
-                'Restart',
-                style: textTheme.labelMedium!.copyWith(
-                  color: colorScheme.primary,
-                ),
-              ),
             ),
           ),
         ],
