@@ -1,0 +1,35 @@
+{
+  "@@locale": "en",
+  "shortFailMsg": "Failed to fetch data.",
+  "@shortFailMsg": {
+    "description": "A short message that something went wrong with fetching data"
+  },
+  "longFailMsg": "Please check your internet connection and try again.",
+  "@longFailMsg": {
+    "description": "A long message that the user encountered"
+  },
+  "wrongState": "Unknown state.",
+  "@wrongState": {
+    "description:": "Fallback text when there no corresponding states"
+  },
+  "retry": "Retry",
+  "back": "Go back",
+  "loadingTxt": "Loading {screens, select, com{comments} alb{album} other{other screen}} from http request...",
+  "@loadingTxt": {
+    "description": "Provide information what user is loading right now",
+    "placeholders": {
+      "screens": {
+        "type": "String"
+      }
+    }
+  },
+  "restartTxt": "Restart fetching {screens, select, com{comments} alb{album} other{other screen}} data",
+  "@restartTxt": {
+    "description": "Provide information what user is restarting",
+    "placeholders": {
+      "screens": {
+        "type": "String"
+      }
+    }
+  }
+}
