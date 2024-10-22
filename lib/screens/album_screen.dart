@@ -23,10 +23,7 @@ class _AlbumScreenState extends State<AlbumScreen> {
           if (state is InitialAlbumState) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is LoadingAlbumState) {
-            return Loading(
-              albumState: state,
-              () => AlbumCubit().fetchAlbums(),
-            );
+            return Loading(albumState: state);
           } else if (state is LoadedAlbumState) {
             return PhotosGrid(state.albums);
           } else if (state is ErrorAlbumState) {

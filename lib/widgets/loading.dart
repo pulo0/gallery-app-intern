@@ -5,14 +5,12 @@ import 'package:gallery_app/logic/album_state.dart';
 import 'package:gallery_app/logic/comment_state.dart';
 
 class Loading extends StatefulWidget {
-  const Loading(
-    this.fetchData, {
+  const Loading({
     super.key,
     this.albumState,
     this.commentState,
   });
 
-  final void Function() fetchData;
   final AlbumState? albumState;
   final CommentState? commentState;
 

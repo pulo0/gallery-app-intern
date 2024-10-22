@@ -18,10 +18,7 @@ class CommentsScreen extends StatelessWidget {
           if (state is InitialCommentState) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is LoadingCommentState) {
-            return Loading(
-              commentState: state,
-              () => CommentCubit().fetchComments(),
-            );
+            return Loading(commentState: state);
           } else if (state is LoadedCommentState) {
             return CommentsList(state.comments);
           } else if (state is ErrorCommentState) {
