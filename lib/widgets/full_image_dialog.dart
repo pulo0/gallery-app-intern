@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gallery_app/models/album.dart';
 import 'package:gallery_app/styles/app_theme.dart';
 import 'package:gallery_app/logic/album_cubit.dart';
@@ -14,6 +15,7 @@ class FullImageDialog extends StatelessWidget {
     const double measurements = 300;
     final TextTheme textTheme = mainTheme().textTheme;
     final ColorScheme colorScheme = mainTheme().colorScheme;
+    final locale = AppLocalizations.of(context)!;
 
     return AlertDialog(
       clipBehavior: Clip.antiAlias,
@@ -48,16 +50,16 @@ class FullImageDialog extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'Failed to fetch',
+                  locale.failShortMsg,
                   textAlign: TextAlign.center,
                   style: textTheme.bodyMedium!
                       .copyWith(color: colorScheme.primary),
                 ),
                 TextButton(
                   onPressed: () => AlbumCubit().fetchAlbums(),
-                  child: const Text(
-                    'Retry',
-                    style: TextStyle(fontSize: 18.5),
+                  child: Text(
+                    locale.retry,
+                    style: const TextStyle(fontSize: 18.5),
                   ),
                 ),
               ],
@@ -68,9 +70,9 @@ class FullImageDialog extends StatelessWidget {
       actions: <Widget>[
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: const Text(
-            'Go back',
-            style: TextStyle(fontSize: 18.5),
+          child: Text(
+            locale.back,
+            style: const TextStyle(fontSize: 18.5),
           ),
         ),
       ],

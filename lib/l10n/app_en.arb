@@ -1,17 +1,22 @@
 {
   "@@locale": "en",
-  "shortFailMsg": "Failed to fetch data.",
-  "@shortFailMsg": {
+  "failShortMsg": "Failed to fetch data.",
+  "@failShortMsg": {
     "description": "A short message that something went wrong with fetching data"
   },
-  "longFailMsg": "Please check your internet connection and try again.",
-  "@longFailMsg": {
+  "failLongMsg": "Please check your internet connection and try again.",
+  "@failLongMsg": {
     "description": "A long message that the user encountered"
+  },
+  "failImgMsg": "Failed to fetch the image from http request",
+  "@failImgMsg": {
+    "description": "Provide text when the user couldn't fetch certain image"
   },
   "wrongState": "Unknown state.",
   "@wrongState": {
     "description:": "Fallback text when there no corresponding states"
   },
+  "title": "Gallery Internship",
   "retry": "Retry",
   "back": "Go back",
   "loadingTxt": "Loading {screens, select, com{comments} alb{album} other{other screen}} from http request...",
@@ -31,5 +36,9 @@
         "type": "String"
       }
     }
+  },
+  "fetchImg": "Album image fetching",
+  "@fetchImg": {
+    "description": "While loading images from the album"
   }
 }

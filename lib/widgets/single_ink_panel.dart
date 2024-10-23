@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gallery_app/models/album.dart';
 import 'package:gallery_app/styles/app_theme.dart';
 import 'package:gallery_app/widgets/full_image_dialog.dart';
@@ -16,6 +17,7 @@ class SingleInkPanel extends StatefulWidget {
 class _SingleInkPanelState extends State<SingleInkPanel> {
   @override
   Widget build(BuildContext context) {
+    final locale = AppLocalizations.of(context)!;
     final ColorScheme colorScheme = mainTheme().colorScheme;
     final index = widget.index;
     final snapshotData = widget.state;
@@ -36,9 +38,9 @@ class _SingleInkPanelState extends State<SingleInkPanel> {
                 FlutterErrorDetails(
                   exception: exception,
                   stack: stackTrace,
-                  library: 'Album image fetching',
+                  library: locale.fetchImg,
                   context: ErrorDescription(
-                    'Failed to fetch the image from http request',
+                    locale.failImgMsg,
                   ),
                 ),
               );

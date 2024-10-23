@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gallery_app/styles/app_theme.dart';
 import 'package:gallery_app/logic/album_state.dart';
 import 'package:gallery_app/logic/comment_state.dart';
@@ -52,6 +53,7 @@ class _LoadingState extends State<Loading> {
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = mainTheme().textTheme;
+    final locale = AppLocalizations.of(context)!;
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -65,15 +67,15 @@ class _LoadingState extends State<Loading> {
             child: AnimatedCrossFade(
               firstChild: Text(
                 widget.albumState == null
-                    ? 'Loading comments from http request...'
-                    : 'Loading album from http request...',
+                    ? locale.loadingTxt('com')
+                    : locale.loadingTxt('alb'),
                 textAlign: TextAlign.center,
                 style: textTheme.titleLarge,
               ),
               secondChild: Text(
                 widget.albumState == null
-                    ? 'Restart fetching comment data'
-                    : 'Restart fetching album data',
+                    ? locale.restartTxt('com')
+                    : locale.restartTxt('alb'),
                 textAlign: TextAlign.center,
                 style: textTheme.titleLarge,
               ),
