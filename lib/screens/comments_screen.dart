@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gallery_app/logic/comment_repository.dart';
 import 'package:gallery_app/logic/comment_state.dart';
 import 'package:gallery_app/logic/comment_cubit.dart';
 import 'package:gallery_app/widgets/comments_list.dart';
@@ -11,8 +12,9 @@ class CommentsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final CommentRepository commentRepository = CommentRepository();
     return BlocProvider(
-      create: (context) => CommentCubit()..fetchComments(),
+      create: (context) => CommentCubit(commentRepository)..fetchComments(),
       child: BlocBuilder<CommentCubit, CommentState>(
         builder: (context, state) {
           if (state is InitialCommentState) {

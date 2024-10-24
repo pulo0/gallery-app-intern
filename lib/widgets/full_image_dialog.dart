@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:gallery_app/logic/album_repository.dart';
 import 'package:gallery_app/models/album.dart';
 import 'package:gallery_app/styles/app_theme.dart';
 import 'package:gallery_app/logic/album_cubit.dart';
@@ -12,10 +13,12 @@ class FullImageDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AlbumRepository albumRepository = AlbumRepository();
+
     const double measurements = 300;
     final TextTheme textTheme = mainTheme().textTheme;
     final ColorScheme colorScheme = mainTheme().colorScheme;
-    final locale = AppLocalizations.of(context)!;
+    final locale = AppLocalizations.of(context);
 
     return AlertDialog(
       clipBehavior: Clip.antiAlias,
@@ -56,7 +59,7 @@ class FullImageDialog extends StatelessWidget {
                       .copyWith(color: colorScheme.primary),
                 ),
                 TextButton(
-                  onPressed: () => AlbumCubit().fetchAlbums(),
+                  onPressed: () => AlbumCubit(albumRepository).fetchAlbums(),
                   child: Text(
                     locale.retry,
                     style: const TextStyle(fontSize: 18.5),
