@@ -12,17 +12,17 @@ class AlbumRepository {
     final response = await _dio.get(url);
 
     try {
-        final List<dynamic> data = response.data;
-        return data.map((eachElement) {
-          final albumResponse = AlbumResponse.fromJson(eachElement);
-          return Album(
-            albumId: albumResponse.albumId,
-            id: albumResponse.id,
-            title: albumResponse.title,
-            url: albumResponse.url,
-            thumbnailUrl: albumResponse.thumbnailUrl,
-          );
-        }).toList();
+      final List<dynamic> data = response.data;
+      return data.map((eachElement) {
+        final albumResponse = AlbumResponse.fromJson(eachElement);
+        return Album(
+          albumId: albumResponse.albumId,
+          id: albumResponse.id,
+          title: albumResponse.title,
+          url: albumResponse.url,
+          thumbnailUrl: albumResponse.thumbnailUrl,
+        );
+      }).toList();
     } on DioException catch (exc) {
       throw Exception(exc);
     }

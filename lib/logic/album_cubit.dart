@@ -10,10 +10,10 @@ class AlbumCubit extends Cubit<AlbumState> {
   Future<void> fetchAlbums() async {
     emit(LoadingAlbumState());
     try {
-        final albums = await _albumRepository.getAlbums();
-        emit(LoadedAlbumState(albums: albums));
-  } catch (exc) {
+      final albums = await _albumRepository.getAlbums();
+      emit(LoadedAlbumState(albums: albums));
+    } catch (exc) {
       emit(ErrorAlbumState(errorMessage: '$exc'));
     }
-    }
+  }
 }

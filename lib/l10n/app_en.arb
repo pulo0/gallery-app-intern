@@ -43,7 +43,7 @@
   },
   "albumLabel": "Album",
   "commentsLabel": "Comments",
-  "albumTooltip":  "Album Section of photos",
+  "albumTooltip": "Album Section of photos",
   "@albumTooltip": {
     "description": "Album screen tooltip information"
   },
