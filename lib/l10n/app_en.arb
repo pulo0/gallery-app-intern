@@ -40,5 +40,15 @@
   "fetchImg": "Album image fetching",
   "@fetchImg": {
     "description": "While loading images from the album"
+  },
+  "albumLabel": "Album",
+  "commentsLabel": "Comments",
+  "albumTooltip":  "Album Section of photos",
+  "@albumTooltip": {
+    "description": "Album screen tooltip information"
+  },
+  "commentsTooltip": "Comment Section",
+  "@commentsTooltip": {
+    "description": "Comments screen tooltip information"
   }
 }

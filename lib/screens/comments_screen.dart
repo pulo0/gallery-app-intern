@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gallery_app/logic/comment_repository.dart';
 import 'package:gallery_app/logic/comment_state.dart';
 import 'package:gallery_app/logic/comment_cubit.dart';
@@ -13,6 +14,7 @@ class CommentsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final CommentRepository commentRepository = CommentRepository();
+    final locale = AppLocalizations.of(context);
     return BlocProvider(
       create: (context) => CommentCubit(commentRepository)..fetchComments(),
       child: BlocBuilder<CommentCubit, CommentState>(
@@ -26,7 +28,10 @@ class CommentsScreen extends StatelessWidget {
           } else if (state is ErrorCommentState) {
             return Error(commentState: state);
           } else {
-            return const Center(child: Text('Unknown state'));
+            return Center(
+                child: Text(
+              locale.wrongState,
+            ));
           }
         },
       ),

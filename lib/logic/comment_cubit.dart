@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery_app/logic/comment_repository.dart';
-import 'package:gallery_app/models/comment.dart';
 import 'package:gallery_app/logic/comment_state.dart';
 
 class CommentCubit extends Cubit<CommentState> {

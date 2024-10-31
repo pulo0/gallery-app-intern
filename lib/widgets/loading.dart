@@ -53,7 +53,7 @@ class _LoadingState extends State<Loading> {
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = mainTheme().textTheme;
-    final locale = AppLocalizations.of(context)!;
+    final locale = AppLocalizations.of(context);
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

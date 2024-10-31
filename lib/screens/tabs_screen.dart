@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gallery_app/styles/app_theme.dart';
 import 'package:gallery_app/screens/album_screen.dart';
 import 'package:gallery_app/screens/comments_screen.dart';
@@ -39,13 +40,15 @@ class _TabsScreenState extends State<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final locale = AppLocalizations.of(context);
+
     switch (_currentIndex) {
       case 1:
-        _currentPageName = 'Comments';
+        _currentPageName = locale.commentsLabel;
         _activeContent = const CommentsScreen();
         break;
       default:
-        _currentPageName = 'Album';
+        _currentPageName = locale.albumLabel;
         _activeContent = const AlbumScreen();
         break;
     }
@@ -64,16 +67,16 @@ class _TabsScreenState extends State<TabsScreen> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: setPage,
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.photo_library_rounded),
-            label: 'Album',
-            tooltip: 'Album Section of photos',
+            icon: const Icon(Icons.photo_library_rounded),
+            label: locale.albumLabel,
+            tooltip: locale.albumTooltip,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.comment),
-            label: 'Comments',
-            tooltip: 'Comment Section',
+            icon: const Icon(Icons.comment),
+            label: locale.commentsLabel,
+            tooltip: locale.commentsTooltip,
           ),
         ],
       ),

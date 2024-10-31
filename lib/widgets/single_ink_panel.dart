@@ -17,7 +17,7 @@ class SingleInkPanel extends StatefulWidget {
 class _SingleInkPanelState extends State<SingleInkPanel> {
   @override
   Widget build(BuildContext context) {
-    final locale = AppLocalizations.of(context)!;
+    final locale = AppLocalizations.of(context);
     final ColorScheme colorScheme = mainTheme().colorScheme;
     final index = widget.index;
     final snapshotData = widget.state;
