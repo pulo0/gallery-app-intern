@@ -1,30 +1,14 @@
 import 'package:dio/dio.dart';
+import 'package:retrofit/http.dart';
+import 'package:retrofit/error_logger.dart';
 import 'package:gallery_app/models/album_response.dart';
-import 'package:gallery_app/models/album.dart';
 
-class AlbumRepository {
-  final Dio _dio = Dio();
+part 'album_repository.g.dart';
 
-  AlbumRepository();
+@RestApi(baseUrl: 'https://jsonplaceholder.typicode.com/photos')
+abstract class AlbumRepository {
+  factory AlbumRepository(Dio dio, {String? baseUrl}) = _AlbumRepository;
 
-  Future<List<Album>> getAlbums() async {
-    const url = 'https://jsonplaceholder.typicode.com/photos';
-    final response = await _dio.get(url);
-
-    try {
-      final List<dynamic> data = response.data;
-      return data.map((eachElement) {
-        final albumResponse = AlbumResponse.fromJson(eachElement);
-        return Album(
-          albumId: albumResponse.albumId,
-          id: albumResponse.id,
-          title: albumResponse.title,
-          url: albumResponse.url,
-          thumbnailUrl: albumResponse.thumbnailUrl,
-        );
-      }).toList();
-    } on DioException catch (exc) {
-      throw Exception(exc);
-    }
-  }
+  @GET('/albums')
+  Future<List<AlbumResponse>> getAlbums();
 }

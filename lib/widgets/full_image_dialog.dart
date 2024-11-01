@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:gallery_app/logic/album_repository.dart';
+import 'package:gallery_app/logic/data_album_repository.dart';
+import 'package:gallery_app/logic/service_locator.dart';
 import 'package:gallery_app/models/album.dart';
 import 'package:gallery_app/styles/app_theme.dart';
 import 'package:gallery_app/logic/album_cubit.dart';
@@ -13,7 +14,7 @@ class FullImageDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AlbumRepository albumRepository = AlbumRepository();
+    final dataAlbumRepository = locator<DataAlbumRepository>();
 
     const double measurements = 300;
     final TextTheme textTheme = mainTheme().textTheme;
@@ -59,7 +60,8 @@ class FullImageDialog extends StatelessWidget {
                       .copyWith(color: colorScheme.primary),
                 ),
                 TextButton(
-                  onPressed: () => AlbumCubit(albumRepository).fetchAlbums(),
+                  onPressed: () =>
+                      AlbumCubit(dataAlbumRepository).fetchAlbums(),
                   child: Text(
                     locale.retry,
                     style: const TextStyle(fontSize: 18.5),

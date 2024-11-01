@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:gallery_app/logic/album_repository.dart';
 import 'package:gallery_app/logic/album_state.dart';
 import 'package:gallery_app/logic/album_cubit.dart';
+import 'package:gallery_app/logic/data_album_repository.dart';
+import 'package:gallery_app/logic/service_locator.dart';
 import 'package:gallery_app/widgets/photos_grid.dart';
 import 'package:gallery_app/widgets/loading.dart';
 import 'package:gallery_app/widgets/error.dart';
@@ -16,12 +17,12 @@ class AlbumScreen extends StatefulWidget {
 }
 
 class _AlbumScreenState extends State<AlbumScreen> {
-  final AlbumRepository albumRepository = AlbumRepository();
+  final _dataAlbumRepository = locator<DataAlbumRepository>();
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AlbumCubit(albumRepository)..fetchAlbums(),
+      create: (context) => AlbumCubit(_dataAlbumRepository)..fetchAlbums(),
       child: BlocBuilder<AlbumCubit, AlbumState>(
         builder: (context, state) {
           if (state is InitialAlbumState) {
