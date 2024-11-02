@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:gallery_app/logic/album_state.dart';
-import 'package:gallery_app/logic/album_cubit.dart';
-import 'package:gallery_app/logic/data_album_repository.dart';
-import 'package:gallery_app/logic/service_locator.dart';
 import 'package:gallery_app/widgets/photos_grid.dart';
 import 'package:gallery_app/widgets/loading.dart';
 import 'package:gallery_app/widgets/error.dart';
+import 'package:gallery_app/logic/service_locator.dart';
+import 'package:gallery_app/logic/album/album_state.dart';
+import 'package:gallery_app/logic/album/album_cubit.dart';
+import 'package:gallery_app/logic/album/data_album_repository.dart';
 
 class AlbumScreen extends StatefulWidget {
   const AlbumScreen({super.key});

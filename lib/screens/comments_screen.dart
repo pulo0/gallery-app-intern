@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:gallery_app/logic/comment_repository.dart';
-import 'package:gallery_app/logic/comment_state.dart';
-import 'package:gallery_app/logic/comment_cubit.dart';
+import 'package:gallery_app/widgets/error.dart';
 import 'package:gallery_app/widgets/comments_list.dart';
 import 'package:gallery_app/widgets/loading.dart';
-import 'package:gallery_app/widgets/error.dart';
+import 'package:gallery_app/logic/service_locator.dart';
+import 'package:gallery_app/logic/comment/comment_state.dart';
+import 'package:gallery_app/logic/comment/comment_cubit.dart';
+import 'package:gallery_app/logic/comment/data_comment_repository.dart';
 
 class CommentsScreen extends StatelessWidget {
   const CommentsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final CommentRepository commentRepository = CommentRepository();
+    final dataCommentRepository = locator<DataCommentRepository>();
     final locale = AppLocalizations.of(context);
     return BlocProvider(
-      create: (context) => CommentCubit(commentRepository)..fetchComments(),
+      create: (context) => CommentCubit(dataCommentRepository)..fetchComments(),
       child: BlocBuilder<CommentCubit, CommentState>(
         builder: (context, state) {
           if (state is InitialCommentState) {

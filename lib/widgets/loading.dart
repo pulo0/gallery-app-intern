@@ -2,8 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gallery_app/styles/app_theme.dart';
-import 'package:gallery_app/logic/album_state.dart';
-import 'package:gallery_app/logic/comment_state.dart';
+import 'package:gallery_app/logic/album/album_state.dart';
+import 'package:gallery_app/logic/comment/comment_state.dart';
 
 class Loading extends StatefulWidget {
   const Loading({

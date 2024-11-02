@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:gallery_app/logic/service_locator.dart';
 import 'package:gallery_app/styles/app_theme.dart';
 import 'package:gallery_app/screens/tabs_screen.dart';
+import 'package:gallery_app/logic/service_locator.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

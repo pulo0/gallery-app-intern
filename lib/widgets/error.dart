@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:gallery_app/logic/data_album_repository.dart';
-import 'package:gallery_app/logic/service_locator.dart';
 import 'package:gallery_app/styles/app_theme.dart';
-import 'package:gallery_app/logic/album_cubit.dart';
-import 'package:gallery_app/logic/comment_cubit.dart';
-import 'package:gallery_app/logic/album_state.dart';
-import 'package:gallery_app/logic/comment_state.dart';
-import 'package:gallery_app/logic/comment_repository.dart';
+import 'package:gallery_app/logic/service_locator.dart';
+import 'package:gallery_app/logic/album/album_cubit.dart';
+import 'package:gallery_app/logic/album/album_state.dart';
+import 'package:gallery_app/logic/album/data_album_repository.dart';
+import 'package:gallery_app/logic/comment/data_comment_repository.dart';
+import 'package:gallery_app/logic/comment/comment_cubit.dart';
+import 'package:gallery_app/logic/comment/comment_state.dart';
 
 class Error extends StatelessWidget {
   const Error({
@@ -22,7 +22,7 @@ class Error extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dataAlbumRepository = locator<DataAlbumRepository>();
-    final CommentRepository commentRepository = CommentRepository();
+    final dataCommentRepository = locator<DataCommentRepository>();
 
     final TextTheme textTheme = mainTheme().textTheme;
     final ColorScheme colorScheme = mainTheme().colorScheme;
@@ -48,7 +48,7 @@ class Error extends StatelessWidget {
           ElevatedButton(
             onPressed: () => albumState != null
                 ? AlbumCubit(dataAlbumRepository).fetchAlbums()
-                : CommentCubit(commentRepository).fetchComments(),
+                : CommentCubit(dataCommentRepository).fetchComments(),
             child: Text(
               locale.retry,
               style: textTheme.labelMedium!.copyWith(
