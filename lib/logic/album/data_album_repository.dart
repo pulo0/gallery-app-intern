@@ -1,15 +1,15 @@
 import 'package:dio/dio.dart';
 import 'package:gallery_app/models/album.dart';
-import 'package:gallery_app/logic/album/album_repository.dart';
+import 'package:gallery_app/logic/api_client.dart';
 
 class DataAlbumRepository {
-  final AlbumRepository _albumRepository;
+  final ApiClient _apiClient;
 
-  DataAlbumRepository(this._albumRepository);
+  DataAlbumRepository(this._apiClient);
 
   Future<List<Album>> getAlbums() async {
     try {
-      final response = await _albumRepository.getAlbums();
+      final response = await _apiClient.getAlbums();
       return response
           .map((e) => Album(
               albumId: e.albumId,

@@ -1,15 +1,15 @@
 import 'package:dio/dio.dart';
+import 'package:gallery_app/logic/api_client.dart';
 import 'package:gallery_app/models/comment.dart';
-import 'package:gallery_app/logic/comment/comment_repository.dart';
 
 class DataCommentRepository {
-  final CommentRepository _commentRepository;
+  final ApiClient _apiClient;
 
-  DataCommentRepository(this._commentRepository);
+  DataCommentRepository(this._apiClient);
 
   Future<List<Comment>> getComments() async {
     try {
-      final response = await _commentRepository.getComments();
+      final response = await _apiClient.getComments();
       return response
           .map((e) => Comment(
               postId: e.postId,
