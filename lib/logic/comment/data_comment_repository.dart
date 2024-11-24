@@ -1,7 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:gallery_app/logic/api_client.dart';
 import 'package:gallery_app/models/comment.dart';
+import 'package:gallery_app/logic/comment/comment_repository.dart';
 
+@LazySingleton(as: CommentRepository)
 class DataCommentRepository {
   final ApiClient _apiClient;
 
