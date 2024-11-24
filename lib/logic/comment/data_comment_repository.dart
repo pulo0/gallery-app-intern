@@ -5,11 +5,12 @@ import 'package:gallery_app/models/comment.dart';
 import 'package:gallery_app/logic/comment/comment_repository.dart';
 
 @LazySingleton(as: CommentRepository)
-class DataCommentRepository {
+class DataCommentRepository extends CommentRepository {
   final ApiClient _apiClient;
 
   DataCommentRepository(this._apiClient);
 
+  @override
   Future<List<Comment>> getComments() async {
     try {
       final response = await _apiClient.getComments();

@@ -8,7 +8,7 @@ import 'package:gallery_app/logic/service_locator.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  setupLocator();
+  setupDependencies();
   runApp(const MainApp());
 }
 

@@ -5,11 +5,12 @@ import 'package:gallery_app/logic/api_client.dart';
 import 'package:gallery_app/logic/album/album_repository.dart';
 
 @LazySingleton(as: AlbumRepository)
-class DataAlbumRepository {
+class DataAlbumRepository extends AlbumRepository {
   final ApiClient _apiClient;
 
   DataAlbumRepository(this._apiClient);
 
+  @override
   Future<List<Album>> getAlbums() async {
     try {
       final response = await _apiClient.getAlbums();
