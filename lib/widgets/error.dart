@@ -4,10 +4,10 @@ import 'package:gallery_app/styles/app_theme.dart';
 import 'package:gallery_app/logic/service_locator.dart';
 import 'package:gallery_app/logic/album/album_cubit.dart';
 import 'package:gallery_app/logic/album/album_state.dart';
-import 'package:gallery_app/logic/album/data_album_repository.dart';
-import 'package:gallery_app/logic/comment/data_comment_repository.dart';
 import 'package:gallery_app/logic/comment/comment_cubit.dart';
 import 'package:gallery_app/logic/comment/comment_state.dart';
+import 'package:gallery_app/logic/album/album_repository.dart';
+import 'package:gallery_app/logic/comment/comment_repository.dart';
 
 class Error extends StatelessWidget {
   const Error({
@@ -21,8 +21,8 @@ class Error extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dataAlbumRepository = locator<DataAlbumRepository>();
-    final dataCommentRepository = locator<DataCommentRepository>();
+    final albumRepository = locator<AlbumRepository>();
+    final commentRepository = locator<CommentRepository>();
 
     final TextTheme textTheme = mainTheme().textTheme;
     final ColorScheme colorScheme = mainTheme().colorScheme;
@@ -47,8 +47,8 @@ class Error extends StatelessWidget {
           const SizedBox(height: 10),
           ElevatedButton(
             onPressed: () => albumState != null
-                ? AlbumCubit(dataAlbumRepository).fetchAlbums()
-                : CommentCubit(dataCommentRepository).fetchComments(),
+                ? AlbumCubit(albumRepository).fetchAlbums()
+                : CommentCubit(commentRepository).fetchComments(),
             child: Text(
               locale.retry,
               style: textTheme.labelMedium!.copyWith(

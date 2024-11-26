@@ -1,16 +1,16 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery_app/logic/comment/comment_state.dart';
-import 'package:gallery_app/logic/comment/data_comment_repository.dart';
+import 'package:gallery_app/logic/comment/comment_repository.dart';
 
 class CommentCubit extends Cubit<CommentState> {
-  final DataCommentRepository dataCommentRepository;
+  CommentCubit(this.commentRepository) : super(InitialCommentState());
 
-  CommentCubit(this.dataCommentRepository) : super(InitialCommentState());
+  final CommentRepository commentRepository;
 
   Future<void> fetchComments() async {
     emit(LoadingCommentState());
     try {
-      final comments = await dataCommentRepository.getComments();
+      final comments = await commentRepository.getComments();
       emit(LoadedCommentState(comments: comments));
     } catch (exc) {
       emit(ErrorCommentState(errorMessage: '$exc'));

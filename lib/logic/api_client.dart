@@ -6,11 +6,11 @@ import 'package:gallery_app/models/comment_response.dart';
 
 part 'api_client.g.dart';
 
-@injectable
+@singleton
 @RestApi(baseUrl: 'https://jsonplaceholder.typicode.com')
 abstract class ApiClient {
   @factoryMethod
-  factory ApiClient(Dio dio, {String baseUrl}) = _ApiClient;
+  factory ApiClient(Dio dio) = _ApiClient;
 
   @GET('/photos')
   Future<List<AlbumResponse>> getAlbums();

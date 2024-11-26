@@ -7,7 +7,7 @@ import 'package:gallery_app/widgets/error.dart';
 import 'package:gallery_app/logic/service_locator.dart';
 import 'package:gallery_app/logic/album/album_state.dart';
 import 'package:gallery_app/logic/album/album_cubit.dart';
-import 'package:gallery_app/logic/album/data_album_repository.dart';
+import 'package:gallery_app/logic/album/album_repository.dart';
 
 class AlbumScreen extends StatefulWidget {
   const AlbumScreen({super.key});
@@ -17,12 +17,12 @@ class AlbumScreen extends StatefulWidget {
 }
 
 class _AlbumScreenState extends State<AlbumScreen> {
-  final _dataAlbumRepository = locator<DataAlbumRepository>();
+  final _albumRepository = locator<AlbumRepository>();
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AlbumCubit(_dataAlbumRepository)..fetchAlbums(),
+      create: (context) => AlbumCubit(_albumRepository)..fetchAlbums(),
       child: BlocBuilder<AlbumCubit, AlbumState>(
         builder: (context, state) {
           if (state is InitialAlbumState) {

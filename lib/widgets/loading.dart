@@ -41,7 +41,6 @@ class _LoadingState extends State<Loading> {
             })
           : _startCountdown--,
     );
-    debugPrint(_startCountdown.toString());
   }
 
   @override
