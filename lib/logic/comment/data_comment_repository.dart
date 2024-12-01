@@ -30,4 +30,24 @@ class DataCommentRepository extends CommentRepository {
       }
     }
   }
+
+  @override
+  Future<Comment> postComment(Comment comment) async {
+    try {
+      final response = await _apiClient.postComment(comment);
+      return Comment(
+        postId: response.postId,
+        id: response.id,
+        name: response.name,
+        email: response.email,
+        body: response.body,
+      );
+    } on DioException catch (exc) {
+      if (exc.response?.statusCode == 404) {
+        throw Exception('Comment posting not able to send (404 code)');
+      } else {
+        throw Exception('More error: ${exc.response}');
+      }
+    }
+  }
 }

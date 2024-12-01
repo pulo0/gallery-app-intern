@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:gallery_app/models/comment.dart';
+import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:injectable/injectable.dart';
 import 'package:gallery_app/models/album_response.dart';
@@ -17,4 +19,7 @@ abstract class ApiClient {
 
   @GET('/comments')
   Future<List<CommentResponse>> getComments();
+
+  @POST('/comments')
+  Future<CommentResponse> postComment(@Body() Comment comment);
 }

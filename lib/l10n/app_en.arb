@@ -43,6 +43,7 @@
   },
   "albumLabel": "Album",
   "commentsLabel": "Comments",
+  "commentPostLabel": "Comment Post",
   "albumTooltip": "Album Section of photos",
   "@albumTooltip": {
     "description": "Album screen tooltip information"
@@ -50,5 +51,9 @@
   "commentsTooltip": "Comment Section",
   "@commentsTooltip": {
     "description": "Comments screen tooltip information"
+  },
+  "commentPostTooltip": "Comment Post Section",
+  "@commentPostTooltip": {
+    "description": "Comment posting screen tooltip information"
   }
 }

@@ -47,6 +47,9 @@ class _TabsScreenState extends State<TabsScreen> {
         _currentPageName = locale.commentsLabel;
         _activeContent = const CommentsScreen();
         break;
+      case 2:
+        _currentPageName = locale.commentPostLabel;
+        _activeContent = const CommentPostScreen();
       default:
         _currentPageName = locale.albumLabel;
         _activeContent = const AlbumScreen();
@@ -78,6 +81,11 @@ class _TabsScreenState extends State<TabsScreen> {
             label: locale.commentsLabel,
             tooltip: locale.commentsTooltip,
           ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.add_comment),
+            label: locale.commentPostLabel,
+            tooltip: locale.commentPostTooltip,
+          )
         ],
       ),
     );
