@@ -4,16 +4,15 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gallery_app/styles/app_theme.dart';
 import 'package:gallery_app/logic/album/album_state.dart';
 import 'package:gallery_app/logic/comment/comment_state.dart';
+import 'package:gallery_app/logic/comment/comment_post_state.dart';
 
 class Loading extends StatefulWidget {
-  const Loading({
-    super.key,
-    this.albumState,
-    this.commentState,
-  });
+  const Loading(
+      {super.key, this.albumState, this.commentState, this.commentPostState});
 
   final AlbumState? albumState;
   final CommentState? commentState;
+  final CommentPostState? commentPostState;
 
   @override
   State<Loading> createState() => _LoadingState();
@@ -65,16 +64,20 @@ class _LoadingState extends State<Loading> {
             ),
             child: AnimatedCrossFade(
               firstChild: Text(
-                widget.albumState == null
-                    ? locale.loadingTxt('com')
-                    : locale.loadingTxt('alb'),
+                widget.albumState != null
+                    ? locale.loadingTxt('alb')
+                    : widget.commentState != null
+                        ? locale.loadingTxt('com')
+                        : locale.loadingTxt('compost'),
                 textAlign: TextAlign.center,
                 style: textTheme.titleLarge,
               ),
               secondChild: Text(
-                widget.albumState == null
-                    ? locale.restartTxt('com')
-                    : locale.restartTxt('alb'),
+                widget.albumState != null
+                    ? locale.restartTxt('alb')
+                    : widget.commentState != null
+                        ? locale.restartTxt('com')
+                        : locale.restartTxt('compost'),
                 textAlign: TextAlign.center,
                 style: textTheme.titleLarge,
               ),

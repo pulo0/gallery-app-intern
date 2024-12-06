@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:gallery_app/logic/comment/comment_post_cubit.dart';
+import 'package:gallery_app/logic/comment/comment_post_state.dart';
 import 'package:gallery_app/styles/app_theme.dart';
 import 'package:gallery_app/logic/service_locator.dart';
 import 'package:gallery_app/logic/album/album_cubit.dart';
@@ -14,10 +16,12 @@ class Error extends StatelessWidget {
     super.key,
     this.albumState,
     this.commentState,
+    this.commentPostState,
   });
 
   final AlbumState? albumState;
   final CommentState? commentState;
+  final CommentPostState? commentPostState;
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +31,7 @@ class Error extends StatelessWidget {
     final TextTheme textTheme = mainTheme().textTheme;
     final ColorScheme colorScheme = mainTheme().colorScheme;
     final locale = AppLocalizations.of(context);
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -40,7 +45,9 @@ class Error extends StatelessWidget {
           Text(
             albumState is ErrorAlbumState
                 ? (albumState as ErrorAlbumState).errorMessage
-                : (commentState as ErrorCommentState).errorMessage,
+                : commentState is ErrorCommentState
+                    ? (commentState as ErrorCommentState).errorMessage
+                    : (commentPostState as ErrorCommentPostState).errorMessage,
             textAlign: TextAlign.center,
             style: textTheme.titleLarge,
           ),
@@ -48,7 +55,9 @@ class Error extends StatelessWidget {
           ElevatedButton(
             onPressed: () => albumState != null
                 ? AlbumCubit(albumRepository).fetchAlbums()
-                : CommentCubit(commentRepository).fetchComments(),
+                : commentState != null
+                    ? CommentCubit(commentRepository).fetchComments()
+                    : CommentPostCubit(commentRepository).restartToForm(),
             child: Text(
               locale.retry,
               style: textTheme.labelMedium!.copyWith(

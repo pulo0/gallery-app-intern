@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gallery_app/widgets/error.dart';
+import 'package:gallery_app/widgets/loading.dart';
 import 'package:gallery_app/logic/comment/comment_post_cubit.dart';
 import 'package:gallery_app/logic/comment/comment_post_state.dart';
 import 'package:gallery_app/logic/comment/comment_repository.dart';
@@ -25,14 +27,12 @@ class _CommentPostScreenState extends State<CommentPostScreen> {
           if (state is InitialCommentPostState) {
             return Text('temp text: main form');
           } else if (state is LoadingCommentPostState) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+            return Loading(commentPostState: state);
           } else if (state is SentCommentPostState) {
             return Text(
                 'temp text: successfully added a comment (out of the form)');
           } else if (state is ErrorCommentPostState) {
-            return Text('temp text: error message I guess');
+            return Error(commentPostState: state);
           } else {
             return Center(
               child: Text(

@@ -17,4 +17,8 @@ class CommentPostCubit extends Cubit<CommentPostState> {
       emit(ErrorCommentPostState(errorMessage: '$exc'));
     }
   }
+
+  Future<void> restartToForm() async {
+    emit(InitialCommentPostState());
+  }
 }

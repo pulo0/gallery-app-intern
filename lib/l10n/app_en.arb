@@ -19,7 +19,7 @@
   "title": "Gallery Internship",
   "retry": "Retry",
   "back": "Go back",
-  "loadingTxt": "Loading {screens, select, com{comments} alb{album} other{other screen}} from http request...",
+  "loadingTxt": "Loading {screens, select, com{comments} compost{comment posting} alb{album} other{other screen}} from http request...",
   "@loadingTxt": {
     "description": "Provide information what user is loading right now",
     "placeholders": {
@@ -28,7 +28,7 @@
       }
     }
   },
-  "restartTxt": "Restart fetching {screens, select, com{comments} alb{album} other{other screen}} data",
+  "restartTxt": "Restart fetching {screens, select, com{comments} compost{comment posting} alb{album} other{other screen}} data",
   "@restartTxt": {
     "description": "Provide information what user is restarting",
     "placeholders": {
