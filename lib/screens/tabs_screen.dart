@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gallery_app/styles/app_theme.dart';
 import 'package:gallery_app/screens/album_screen.dart';
 import 'package:gallery_app/screens/comments_screen.dart';
+import 'package:gallery_app/screens/comment_post_screen.dart';
 
 final TextTheme textTheme = mainTheme().textTheme;
 
