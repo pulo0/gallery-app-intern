@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gallery_app/logic/comment/comment_post_cubit.dart';
-import 'package:gallery_app/models/comment.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gallery_app/styles/app_theme.dart';
+import 'package:gallery_app/models/comment.dart';
+import 'package:gallery_app/logic/comment/comment_post_cubit.dart';
 
 class FormComment extends StatefulWidget {
   const FormComment(this.commentPostCubit, {super.key});
@@ -31,7 +32,7 @@ class _FormCommentState extends State<FormComment> {
       return 'This field is required';
     }
     if (value.length <= 5) {
-      return 'Name field should be at least 5 characters long';
+      return 'Field should be at least 6 characters long';
     }
     return null;
   }
@@ -51,6 +52,7 @@ class _FormCommentState extends State<FormComment> {
 
   @override
   Widget build(BuildContext context) {
+    final locale = AppLocalizations.of(context);
     final double horizontalPadding = 36.0;
 
     final TextTheme textTheme = mainTheme().textTheme;
@@ -77,8 +79,8 @@ class _FormCommentState extends State<FormComment> {
                   TextFormField(
                     autocorrect: true,
                     decoration: InputDecoration(
-                      labelText: 'Name',
-                      hintText: 'exemplary name',
+                      labelText: locale.labelFormTxt('name'),
+                      hintText: locale.hintFormTxt('name'),
                       labelStyle: textTheme.bodyMedium!.copyWith(
                         color: colorScheme.secondary,
                         fontWeight: FontWeight.bold,
@@ -95,8 +97,8 @@ class _FormCommentState extends State<FormComment> {
                   TextFormField(
                     autocorrect: false,
                     decoration: InputDecoration(
-                      labelText: 'Email',
-                      hintText: 'example123@gmail.com',
+                      labelText: locale.labelFormTxt('mail'),
+                      hintText: locale.hintFormTxt('mail'),
                       labelStyle: textTheme.bodyMedium!.copyWith(
                         color: colorScheme.secondary,
                         fontWeight: FontWeight.bold,
@@ -113,8 +115,8 @@ class _FormCommentState extends State<FormComment> {
                   TextFormField(
                     autocorrect: true,
                     decoration: InputDecoration(
-                      labelText: 'Body',
-                      hintText: 'body of comment',
+                      labelText: locale.labelFormTxt('body'),
+                      hintText: locale.hintFormTxt('body'),
                       labelStyle: textTheme.bodyMedium!.copyWith(
                         color: colorScheme.secondary,
                         fontWeight: FontWeight.bold,
@@ -143,12 +145,12 @@ class _FormCommentState extends State<FormComment> {
                         widget.commentPostCubit.postComment(item);
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text('Successfully added comment'),
+                            content: Text(locale.successTxt),
                           ),
                         );
                       }
                     },
-                    child: Text('Send Comment'),
+                    child: Text(locale.sendTxt),
                   ),
                 ],
               ),
