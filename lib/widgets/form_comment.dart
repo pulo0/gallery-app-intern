@@ -143,7 +143,7 @@ class _FormCommentState extends State<FormComment> {
                         widget.commentPostCubit.postComment(item);
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text('Successfully added new comment'),
+                            content: Text('Successfully added comment'),
                           ),
                         );
                       }

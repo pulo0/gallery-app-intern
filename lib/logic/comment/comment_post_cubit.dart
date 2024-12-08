@@ -13,8 +13,8 @@ class CommentPostCubit extends Cubit<CommentPostState> {
   Future<void> postComment(Comment comment) async {
     emit(LoadingCommentPostState());
     try {
-      final post = await commentRepository.postComment(comment);
-      emit(SentCommentPostState(comment: post));
+      await commentRepository.postComment(comment);
+      emit(SentCommentPostState());
     } catch (exc) {
       emit(ErrorCommentPostState(errorMessage: '$exc'));
     }

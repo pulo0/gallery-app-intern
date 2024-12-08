@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:gallery_app/models/comment_response.dart';
+import 'package:gallery_app/models/comment_request.dart';
 import 'package:injectable/injectable.dart';
 import 'package:gallery_app/models/comment.dart';
 import 'package:gallery_app/logic/api_client.dart';
@@ -33,15 +33,14 @@ class DataCommentRepository extends CommentRepository {
   }
 
   @override
-  Future<CommentResponse> postComment(Comment comment) async {
+  Future<void> postComment(Comment comment) async {
     try {
-      final response = await _apiClient.postComment(comment);
-      return CommentResponse(
-        postId: response.postId,
-        id: response.id,
-        name: response.name,
-        email: response.email,
-        body: response.body,
+      await _apiClient.postComment(
+        CommentRequest(
+          name: comment.name,
+          email: comment.email,
+          body: comment.body,
+        ),
       );
     } on DioException catch (exc) {
       if (exc.response?.statusCode == 404) {
