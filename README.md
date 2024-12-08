@@ -23,3 +23,5 @@ Mainly the initial idea of a project is to create a simple gallery app that fetc
 **2.** ```comments_screen.dart``` - list of comments.
 
 **3.** ```tabs_screen.dart``` - navigation between those two screens.
+
+**4.** ```comment_post_screen.dart``` - using POST adding to API a comment.
