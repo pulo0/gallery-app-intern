@@ -1,8 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:gallery_app/models/comment.dart';
-import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:injectable/injectable.dart';
+import 'package:gallery_app/models/comment.dart';
 import 'package:gallery_app/models/album_response.dart';
 import 'package:gallery_app/models/comment_response.dart';
 

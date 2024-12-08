@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:gallery_app/models/comment_response.dart';
 import 'package:injectable/injectable.dart';
 import 'package:gallery_app/models/comment.dart';
 import 'package:gallery_app/logic/api_client.dart';
@@ -32,10 +33,10 @@ class DataCommentRepository extends CommentRepository {
   }
 
   @override
-  Future<Comment> postComment(Comment comment) async {
+  Future<CommentResponse> postComment(Comment comment) async {
     try {
       final response = await _apiClient.postComment(comment);
-      return Comment(
+      return CommentResponse(
         postId: response.postId,
         id: response.id,
         name: response.name,

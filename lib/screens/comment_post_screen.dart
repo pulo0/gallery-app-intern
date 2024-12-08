@@ -16,13 +16,15 @@ class CommentPostScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final commentRepository = locator<CommentRepository>();
+    final commentPostCubit = locator<CommentPostCubit>();
     final locale = AppLocalizations.of(context);
+
     return BlocProvider(
       create: (context) => CommentPostCubit(commentRepository),
       child: BlocBuilder<CommentPostCubit, CommentPostState>(
         builder: (context, state) {
           if (state is InitialCommentPostState) {
-            return FormComment();
+            return FormComment(commentPostCubit);
           } else if (state is LoadingCommentPostState) {
             return Loading(commentPostState: state);
           } else if (state is SentCommentPostState) {

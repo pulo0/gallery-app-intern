@@ -1,8 +1,10 @@
+import 'package:injectable/injectable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery_app/models/comment.dart';
 import 'package:gallery_app/logic/comment/comment_post_state.dart';
 import 'package:gallery_app/logic/comment/comment_repository.dart';
 
+@singleton
 class CommentPostCubit extends Cubit<CommentPostState> {
   CommentPostCubit(this.commentRepository) : super(InitialCommentPostState());
 
