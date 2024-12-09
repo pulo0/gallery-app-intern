@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:gallery_app/data/network/request/comment_request.dart';
 import 'package:injectable/injectable.dart';
 import 'package:gallery_app/domain/models/comment.dart';
 import 'package:gallery_app/data/network/service/api_client.dart';
+import 'package:gallery_app/data/network/request/comment_request.dart';
 import 'package:gallery_app/domain/repositories/comment_repository.dart';
 
 @LazySingleton(as: CommentRepository)

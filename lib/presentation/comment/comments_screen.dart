@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:gallery_app/presentation/comment/widgets/comments_list.dart';
 import 'package:gallery_app/presentation/universal_widgets/error.dart';
 import 'package:gallery_app/presentation/universal_widgets/loading.dart';
-import 'package:gallery_app/data/network/service/service_locator.dart';
-import 'package:gallery_app/presentation/comment/cubit/comment_state.dart';
 import 'package:gallery_app/presentation/comment/cubit/comment_cubit.dart';
+import 'package:gallery_app/presentation/comment/cubit/comment_state.dart';
+import 'package:gallery_app/presentation/comment/widgets/comments_list.dart';
+import 'package:gallery_app/data/network/service/service_locator.dart';
 import 'package:gallery_app/domain/repositories/comment_repository.dart';
 
 class CommentsScreen extends StatelessWidget {

@@ -2,8 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:injectable/injectable.dart';
 import 'package:gallery_app/data/network/response/album_response.dart';
-import 'package:gallery_app/data/network/request/comment_request.dart';
 import 'package:gallery_app/data/network/response/comment_response.dart';
+import 'package:gallery_app/data/network/request/comment_request.dart';
 
 part 'api_client.g.dart';
 

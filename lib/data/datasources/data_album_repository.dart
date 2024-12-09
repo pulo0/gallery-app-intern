@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:gallery_app/domain/models/album.dart';
 import 'package:gallery_app/data/network/service/api_client.dart';
+import 'package:gallery_app/domain/models/album.dart';
 import 'package:gallery_app/domain/repositories/album_repository.dart';
 
 @LazySingleton(as: AlbumRepository)

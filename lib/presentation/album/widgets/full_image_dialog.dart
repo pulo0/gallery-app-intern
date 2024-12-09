@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:gallery_app/domain/models/album.dart';
 import 'package:gallery_app/styles/app_theme.dart';
-import 'package:gallery_app/data/network/service/service_locator.dart';
 import 'package:gallery_app/presentation/album/cubit/album_cubit.dart';
+import 'package:gallery_app/data/network/service/service_locator.dart';
+import 'package:gallery_app/domain/models/album.dart';
 import 'package:gallery_app/domain/repositories/album_repository.dart';
 
 class FullImageDialog extends StatelessWidget {

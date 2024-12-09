@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gallery_app/styles/app_theme.dart';
-import 'package:gallery_app/domain/models/comment.dart';
 import 'package:gallery_app/presentation/comment_post/cubit/comment_post_cubit.dart';
+import 'package:gallery_app/domain/models/comment.dart';
 
 class FormComment extends StatefulWidget {
   const FormComment(this.commentPostCubit, {super.key});

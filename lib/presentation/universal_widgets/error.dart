@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:gallery_app/styles/app_theme.dart';
 import 'package:gallery_app/presentation/comment_post/cubit/comment_post_cubit.dart';
 import 'package:gallery_app/presentation/comment_post/cubit/comment_post_state.dart';
-import 'package:gallery_app/styles/app_theme.dart';
-import 'package:gallery_app/data/network/service/service_locator.dart';
 import 'package:gallery_app/presentation/album/cubit/album_cubit.dart';
 import 'package:gallery_app/presentation/album/cubit/album_state.dart';
 import 'package:gallery_app/presentation/comment/cubit/comment_cubit.dart';
 import 'package:gallery_app/presentation/comment/cubit/comment_state.dart';
 import 'package:gallery_app/domain/repositories/album_repository.dart';
 import 'package:gallery_app/domain/repositories/comment_repository.dart';
+import 'package:gallery_app/data/network/service/service_locator.dart';
 
 class Error extends StatelessWidget {
   const Error({
