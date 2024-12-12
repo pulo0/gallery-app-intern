@@ -4,7 +4,7 @@ import 'package:gallery_app/presentation/comment_post/cubit/comment_post_state.d
 import 'package:gallery_app/domain/models/comment.dart';
 import 'package:gallery_app/domain/repositories/comment_repository.dart';
 
-@singleton
+@injectable
 class CommentPostCubit extends Cubit<CommentPostState> {
   CommentPostCubit(this.commentRepository) : super(InitialCommentPostState());
 
