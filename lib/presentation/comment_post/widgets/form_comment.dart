@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gallery_app/styles/app_theme.dart';
 import 'package:gallery_app/presentation/comment_post/cubit/comment_post_cubit.dart';
@@ -27,52 +28,31 @@ class _FormCommentState extends State<FormComment> {
     super.dispose();
   }
 
-  String? validatorDetails(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'This field is required';
-    }
-    if (value.length <= 5) {
-      return 'Field should be at least 6 characters long';
-    }
-    return null;
-  }
-
-  String? validatorEmail(String? value) {
-    final emailRegex = RegExp(
-        r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$");
-    if (value == null || value.isEmpty) {
-      return 'This field is required';
-    }
-
-    if (!emailRegex.hasMatch(value)) {
-      return "This field doesn't have a email format";
-    }
-    return null;
-  }
-
   @override
   Widget build(BuildContext context) {
     final locale = AppLocalizations.of(context);
-    final double horizontalPadding = 36.0;
 
     final TextTheme textTheme = mainTheme().textTheme;
     final ColorScheme colorScheme = mainTheme().colorScheme;
 
-    final keyboardPlacement = MediaQuery.of(context).viewInsets.bottom;
+    final validatorDetails = MultiValidator([
+      RequiredValidator(errorText: locale.validFieldRequest),
+      MinLengthValidator(6, errorText: locale.validFieldChar)
+    ]);
 
-    return Center(
-      child: LayoutBuilder(builder: (context, constraints) {
-        return SingleChildScrollView(
+    final validatorEmail = MultiValidator([
+      RequiredValidator(errorText: locale.validFieldRequest),
+      EmailValidator(errorText: locale.validFieldEmail)
+    ]);
+
+    return SafeArea(
+      child: Center(
+        child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
-          child: Form(
-            key: _formKey,
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(
-                horizontalPadding,
-                0,
-                horizontalPadding,
-                keyboardPlacement,
-              ),
+          child: Padding(
+            padding: EdgeInsets.all(30),
+            child: Form(
+              key: _formKey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -91,7 +71,7 @@ class _FormCommentState extends State<FormComment> {
                         color: colorScheme.secondary,
                         fontWeight: FontWeight.w400),
                     controller: _nameController,
-                    validator: validatorDetails,
+                    validator: validatorDetails.call,
                   ),
                   SizedBox(height: 16.0),
                   TextFormField(
@@ -109,7 +89,7 @@ class _FormCommentState extends State<FormComment> {
                         color: colorScheme.secondary,
                         fontWeight: FontWeight.w400),
                     controller: _emailController,
-                    validator: validatorEmail,
+                    validator: validatorEmail.call,
                   ),
                   SizedBox(height: 16.0),
                   TextFormField(
@@ -127,7 +107,7 @@ class _FormCommentState extends State<FormComment> {
                         color: colorScheme.secondary,
                         fontWeight: FontWeight.w400),
                     controller: _bodyController,
-                    validator: validatorDetails,
+                    validator: validatorDetails.call,
                   ),
                   SizedBox(
                     height: 16.0,
@@ -156,8 +136,8 @@ class _FormCommentState extends State<FormComment> {
               ),
             ),
           ),
-        );
-      }),
+        ),
+      ),
     );
   }
 }
