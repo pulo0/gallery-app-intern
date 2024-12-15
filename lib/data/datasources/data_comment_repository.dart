@@ -37,6 +37,7 @@ class DataCommentRepository extends CommentRepository {
     try {
       await _apiClient.postComment(
         CommentRequest(
+          postId: comment.postId,
           name: comment.name,
           email: comment.email,
           body: comment.body,

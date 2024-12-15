@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gallery_app/styles/app_theme.dart';
@@ -6,9 +7,7 @@ import 'package:gallery_app/presentation/comment_post/cubit/comment_post_cubit.d
 import 'package:gallery_app/domain/models/comment.dart';
 
 class FormComment extends StatefulWidget {
-  const FormComment(this.commentPostCubit, {super.key});
-
-  final CommentPostCubit commentPostCubit;
+  const FormComment({super.key});
 
   @override
   State<StatefulWidget> createState() => _FormCommentState();
@@ -51,88 +50,89 @@ class _FormCommentState extends State<FormComment> {
           physics: const BouncingScrollPhysics(),
           child: Padding(
             padding: EdgeInsets.all(30),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  TextFormField(
-                    autocorrect: true,
-                    decoration: InputDecoration(
-                      labelText: locale.labelFormTxt('name'),
-                      hintText: locale.hintFormTxt('name'),
-                      labelStyle: textTheme.bodyMedium!.copyWith(
-                        color: colorScheme.secondary,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      icon: Icon(Icons.person),
-                    ),
-                    style: textTheme.bodyMedium!.copyWith(
-                        color: colorScheme.secondary,
-                        fontWeight: FontWeight.w400),
-                    controller: _nameController,
-                    validator: validatorDetails.call,
-                  ),
-                  SizedBox(height: 16.0),
-                  TextFormField(
-                    autocorrect: false,
-                    decoration: InputDecoration(
-                      labelText: locale.labelFormTxt('mail'),
-                      hintText: locale.hintFormTxt('mail'),
-                      labelStyle: textTheme.bodyMedium!.copyWith(
-                        color: colorScheme.secondary,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      icon: Icon(Icons.alternate_email),
-                    ),
-                    style: textTheme.bodyMedium!.copyWith(
-                        color: colorScheme.secondary,
-                        fontWeight: FontWeight.w400),
-                    controller: _emailController,
-                    validator: validatorEmail.call,
-                  ),
-                  SizedBox(height: 16.0),
-                  TextFormField(
-                    autocorrect: true,
-                    decoration: InputDecoration(
-                      labelText: locale.labelFormTxt('body'),
-                      hintText: locale.hintFormTxt('body'),
-                      labelStyle: textTheme.bodyMedium!.copyWith(
-                        color: colorScheme.secondary,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      icon: Icon(Icons.abc),
-                    ),
-                    style: textTheme.bodyMedium!.copyWith(
-                        color: colorScheme.secondary,
-                        fontWeight: FontWeight.w400),
-                    controller: _bodyController,
-                    validator: validatorDetails.call,
-                  ),
-                  SizedBox(
-                    height: 16.0,
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      final item = Comment(
-                        postId: 0,
-                        id: 0,
-                        name: _nameController.text,
-                        email: _emailController.text,
-                        body: _bodyController.text,
-                      );
-                      if (_formKey.currentState!.validate()) {
-                        widget.commentPostCubit.postComment(item);
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(locale.successTxt),
+            child: Card(
+              shadowColor: colorScheme.primary,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      TextFormField(
+                        autocorrect: true,
+                        decoration: InputDecoration(
+                          labelText: locale.labelFormTxt('name'),
+                          hintText: locale.hintFormTxt('name'),
+                          labelStyle: textTheme.bodyMedium!.copyWith(
+                            color: colorScheme.secondary,
+                            fontWeight: FontWeight.bold,
                           ),
-                        );
-                      }
-                    },
-                    child: Text(locale.sendTxt),
+                          icon: Icon(Icons.person),
+                        ),
+                        style: textTheme.bodyMedium!.copyWith(
+                            color: colorScheme.secondary,
+                            fontWeight: FontWeight.w400),
+                        controller: _nameController,
+                        validator: validatorDetails.call,
+                      ),
+                      SizedBox(height: 16.0),
+                      TextFormField(
+                        autocorrect: false,
+                        decoration: InputDecoration(
+                          labelText: locale.labelFormTxt('mail'),
+                          hintText: locale.hintFormTxt('mail'),
+                          labelStyle: textTheme.bodyMedium!.copyWith(
+                            color: colorScheme.secondary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          icon: Icon(Icons.alternate_email),
+                        ),
+                        style: textTheme.bodyMedium!.copyWith(
+                            color: colorScheme.secondary,
+                            fontWeight: FontWeight.w400),
+                        controller: _emailController,
+                        validator: validatorEmail.call,
+                      ),
+                      SizedBox(height: 16.0),
+                      TextFormField(
+                        autocorrect: true,
+                        decoration: InputDecoration(
+                          labelText: locale.labelFormTxt('body'),
+                          hintText: locale.hintFormTxt('body'),
+                          labelStyle: textTheme.bodyMedium!.copyWith(
+                            color: colorScheme.secondary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          icon: Icon(Icons.abc),
+                        ),
+                        style: textTheme.bodyMedium!.copyWith(
+                            color: colorScheme.secondary,
+                            fontWeight: FontWeight.w400),
+                        controller: _bodyController,
+                        validator: validatorDetails.call,
+                      ),
+                      SizedBox(
+                        height: 16.0,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          final item = Comment(
+                            postId: 100,
+                            id: 1,
+                            name: _nameController.text,
+                            email: _emailController.text,
+                            body: _bodyController.text,
+                          );
+                          if (_formKey.currentState!.validate()) {
+                            context.read<CommentPostCubit>().postComment(item);
+                          }
+                        },
+                        child: Text(locale.sendTxt),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
           ),

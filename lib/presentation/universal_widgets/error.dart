@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gallery_app/styles/app_theme.dart';
 import 'package:gallery_app/presentation/comment_post/cubit/comment_post_cubit.dart';
@@ -57,7 +58,7 @@ class Error extends StatelessWidget {
                 ? AlbumCubit(albumRepository).fetchAlbums()
                 : commentState != null
                     ? CommentCubit(commentRepository).fetchComments()
-                    : CommentPostCubit(commentRepository).restartToForm(),
+                    : context.read<CommentPostCubit>().restartToForm(),
             child: Text(
               locale.retry,
               style: textTheme.labelMedium!.copyWith(
