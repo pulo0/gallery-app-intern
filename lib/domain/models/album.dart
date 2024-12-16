@@ -1,4 +1,6 @@
-class Album {
+import 'package:equatable/equatable.dart';
+
+class Album extends Equatable {
   final int albumId;
   final int id;
   final String title;
@@ -12,4 +14,7 @@ class Album {
     required this.url,
     required this.thumbnailUrl,
   });
+
+  @override
+  List<Object?> get props => [albumId, id, title, url, thumbnailUrl];
 }
