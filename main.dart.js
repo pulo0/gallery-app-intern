@@ -82532,7 +82532,7 @@ return r},
 $S:504}
 A.a80.prototype={
 $0(){var s=new A.Tq(this.a.$1$0(t.kE))
-s.b="https://jsonplaceholder.typicode.com"
+s.b="https://cors-anywhere.herokuapp.com/https://jsonplaceholder.typicode.com"
 return s},
 $S:505}
 A.a81.prototype={
