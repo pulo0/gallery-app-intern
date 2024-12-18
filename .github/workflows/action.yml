@@ -2,6 +2,10 @@ name: 'gallery-app-intern'
 description: 'App for an internship application that displays album pictures and comments (also adding comment) from http request'
 author: 'pulo0'
 
+on:
+  push:
+    branches: [ main ]
+
 inputs:
   webRenderer:
     description: 'Use of the selected web renderer'
