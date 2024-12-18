@@ -1,0 +1,36 @@
+name: 'gallery-app-intern'
+description: 'App for an internship application that displays album pictures and comments (also adding comment) from http request'
+author: 'pulo0'
+
+inputs:
+  webRenderer:
+    description: 'Use of the selected web renderer'
+    default: auto
+  workingDirectory:
+    description: 'Where the project is located'
+    default: .
+  targetBranch:
+    description: 'Target branch to deploy site (gh-pages)'
+    default: gh-pages
+  baseHref:
+    description: 'Describe base href of the site (https://example.github.io/this-part/)'
+    default: "/gallery-app-intern/"
+
+runs:
+  using: 'composite'
+  steps:
+    - run: fvm flutter config --enable-web
+      shell: bash
+      working-directory: ${{inputs.workingDirectory}}
+    - run: fvm flutter build web --release --web-renderer=${{inputs.webRenderer}} --base-href ${{inputs.baseHref}}
+      shell: bash
+      working-directory: ${{inputs.workingDirectory}}
+    - run: git --work-tree build/web add --all
+      shell: bash
+      working-directory: ${{inputs.workingDirectory}}
+    - run: git commit -m "automatic deploy"
+      shell: bash
+      working-directory: ${{inputs.workingDirectory}}
+    - run: git push origin HEAD:${{inputs.targetBranch}} --force
+      shell: bash
+      working-directory: ${{inputs.workingDirectory}}

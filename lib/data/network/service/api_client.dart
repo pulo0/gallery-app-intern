@@ -8,9 +8,7 @@ import 'package:gallery_app/data/network/request/comment_request.dart';
 part 'api_client.g.dart';
 
 @singleton
-@RestApi(
-    baseUrl:
-        'https://cors-anywhere.herokuapp.com/https://jsonplaceholder.typicode.com')
+@RestApi(baseUrl: 'https://jsonplaceholder.typicode.com')
 abstract class ApiClient {
   @factoryMethod
   factory ApiClient(Dio dio) = _ApiClient;
