@@ -20,14 +20,14 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Flutter build web
-        run: flutter build web --base-href="/gallery-app-intern/"
-
       - name: Add generated files (build_runner)
         run: dart run build_runner build
 
       - name: Renew the check for dependencies (for localization to load in)
         run: flutter pub get
+
+      - name: Flutter build web
+        run: flutter build web --base-href="/gallery-app-intern/"
 
       - name: Deploy to Github Pages
         uses: peaceiris/actions-gh-pages@v3
