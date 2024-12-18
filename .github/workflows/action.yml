@@ -20,6 +20,10 @@ inputs:
     description: 'Describe base href of the site (https://example.github.io/this-part/)'
     default: "/gallery-app-intern/"
 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
 runs:
   using: 'composite'
   steps:
