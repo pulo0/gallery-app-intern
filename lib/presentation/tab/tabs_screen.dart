@@ -24,7 +24,7 @@ class _TabsScreenState extends State<TabsScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            'TODO: A list of thumbnails, don\'t worry...',
+            'current page (this text wont be visible)',
             textAlign: TextAlign.center,
             style: textTheme.titleLarge,
           ),

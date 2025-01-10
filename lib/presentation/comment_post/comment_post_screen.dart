@@ -19,45 +19,45 @@ class CommentPostScreen extends StatelessWidget {
     final locale = AppLocalizations.of(context);
 
     return BlocProvider(
-      create: (context) => CommentPostCubit(commentRepository),
-      child: BlocListener<CommentPostCubit, CommentPostState>(
-        listener: (context, state) {
-          if (state is SentCommentPostState) {
-            context.read<CommentPostCubit>().restartToForm();
-            // Vanilla option without pub package
-            // (with fluttertoast package)
-            // ScaffoldMessenger.of(context).showSnackBar(
-            //   SnackBar(
-            //     content: Row(
-            //       children: [
-            //         Icon(
-            //           Icons.check_circle,
-            //           size: 16,
-            //           color: colorScheme.surface,
-            //         ),
-            //         SizedBox(width: 6.0),
-            //         Text(locale.successTxt),
-            //       ],
-            //     ),
-            //   ),
-            // );
-            showToast(locale.successTxt);
-          }
-        },
-        child: BlocBuilder<CommentPostCubit, CommentPostState>(
+        create: (context) => CommentPostCubit(commentRepository),
+        child: BlocConsumer<CommentPostCubit, CommentPostState>(
+          listener: (context, state) {
+            if (state is SentCommentPostState) {
+              context.read<CommentPostCubit>().restartToForm();
+              // Vanilla option without pub package
+              // (with fluttertoast package)
+
+              /*
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Row(
+                    children: [
+                      Icon(
+                        Icons.check_circle,
+                        size: 16,
+                        color: colorScheme.surface,
+                      ),
+                      SizedBox(width: 6.0),
+                      Text(locale.successTxt),
+                    ],
+                  ),
+                ),
+              );
+              */
+              showToast(locale.successTxt);
+            }
+          },
           builder: (context, state) {
             if (state is InitialCommentPostState) {
               return FormComment();
             } else if (state is LoadingCommentPostState) {
-              return Loading();
+              return Loading(commentPostState: state);
             } else if (state is ErrorCommentPostState) {
-              return Error();
+              return Error(commentPostState: state);
             } else {
               return Text(locale.wrongState);
             }
           },
-        ),
-      ),
-    );
+        ));
   }
 }
