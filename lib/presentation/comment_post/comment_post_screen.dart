@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:gallery_app/utils/toast.dart';
 import 'package:gallery_app/presentation/comment_post/widgets/form_comment.dart';
 import 'package:gallery_app/presentation/universal_widgets/loading.dart';
 import 'package:gallery_app/presentation/universal_widgets/error.dart';
@@ -8,7 +9,6 @@ import 'package:gallery_app/presentation/comment_post/cubit/comment_post_cubit.d
 import 'package:gallery_app/presentation/comment_post/cubit/comment_post_state.dart';
 import 'package:gallery_app/domain/repositories/comment_repository.dart';
 import 'package:gallery_app/data/network/service/service_locator.dart';
-import 'package:gallery_app/utils/toast.dart';
 
 class CommentPostScreen extends StatelessWidget {
   const CommentPostScreen({super.key});
@@ -19,15 +19,14 @@ class CommentPostScreen extends StatelessWidget {
     final locale = AppLocalizations.of(context);
 
     return BlocProvider(
-        create: (context) => CommentPostCubit(commentRepository),
-        child: BlocConsumer<CommentPostCubit, CommentPostState>(
-          listener: (context, state) {
-            if (state is SentCommentPostState) {
-              context.read<CommentPostCubit>().restartToForm();
-              // Vanilla option without pub package
-              // (with fluttertoast package)
+      create: (context) => CommentPostCubit(commentRepository),
+      child: BlocConsumer<CommentPostCubit, CommentPostState>(
+        listener: (context, state) {
+          if (state is SentCommentPostState) {
+            // Vanilla option without pub package
+            // (with fluttertoast package)
 
-              /*
+            /*
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Row(
@@ -44,20 +43,18 @@ class CommentPostScreen extends StatelessWidget {
                 ),
               );
               */
-              showToast(locale.successTxt);
-            }
-          },
-          builder: (context, state) {
-            if (state is InitialCommentPostState) {
-              return FormComment();
-            } else if (state is LoadingCommentPostState) {
-              return Loading(commentPostState: state);
-            } else if (state is ErrorCommentPostState) {
-              return Error(commentPostState: state);
-            } else {
-              return Text(locale.wrongState);
-            }
-          },
-        ));
+            showToast(locale.successTxt);
+          }
+        },
+        builder: (context, state) {
+          return switch (state) {
+            InitialCommentPostState() => FormComment(),
+            LoadingCommentPostState() => Loading(commentPostState: state),
+            ErrorCommentPostState() => Error(commentPostState: state),
+            SentCommentPostState() => FormComment(),
+          };
+        },
+      ),
+    );
   }
 }

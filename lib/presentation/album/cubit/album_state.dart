@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:gallery_app/domain/models/album.dart';
 
-abstract class AlbumState extends Equatable {
+sealed class AlbumState extends Equatable {
   @override
   List<Object?> get props => [];
 

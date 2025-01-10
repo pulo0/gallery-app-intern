@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-abstract class CommentPostState extends Equatable {
+sealed class CommentPostState extends Equatable {
   @override
   List<Object?> get props => [];
 
