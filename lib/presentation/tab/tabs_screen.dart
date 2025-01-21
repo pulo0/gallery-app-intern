@@ -68,25 +68,25 @@ class _TabsScreenState extends State<TabsScreen> {
         elevation: 1,
       ),
       body: _activeContent,
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: setPage,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: _currentIndex,
+        onDestinationSelected: setPage,
+        destinations: <NavigationDestination>[
+          NavigationDestination(
             icon: const Icon(Icons.photo_library_rounded),
             label: locale.albumLabel,
             tooltip: locale.albumTooltip,
           ),
-          BottomNavigationBarItem(
+          NavigationDestination(
             icon: const Icon(Icons.comment),
             label: locale.commentsLabel,
             tooltip: locale.commentsTooltip,
           ),
-          BottomNavigationBarItem(
+          NavigationDestination(
             icon: const Icon(Icons.add_comment),
             label: locale.commentPostLabel,
             tooltip: locale.commentPostTooltip,
-          )
+          ),
         ],
       ),
     );
